@@ -8,7 +8,9 @@
 import UIKit
 
 class ListViewController: UIViewController {
-
+    
+    @IBOutlet var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
