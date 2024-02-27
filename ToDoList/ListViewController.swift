@@ -18,6 +18,12 @@ class ListViewController: UIViewController {
         title = "TO DO LIST"
         self.navigationController?.navigationBar.tintColor = .black
     }
+    
+    @IBAction func didTapAdd() {
+        let vc = storyboard?.instantiateViewController(identifier: "AddListViewController") as! AddListViewController
+        vc.title = "New Task"
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension ListViewController: UITableViewDelegate {

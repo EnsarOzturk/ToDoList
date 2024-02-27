@@ -32,7 +32,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="o3m-wt-JW8">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="zlg-7k-5BP"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ge1-nx-lpt"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ge1-nx-lpt">
+                            <connections>
+                                <action selector="didTapAdd" destination="BYZ-38-t0r" id="qAP-eX-e3y"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="U4m-tW-eMc" id="Nvg-Xl-vES"/>
@@ -50,7 +54,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="D1n-1c-LvP"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r24-gU-i06" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -79,6 +83,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
