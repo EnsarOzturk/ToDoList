@@ -16,14 +16,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="U4m-tW-eMc">
-                                <rect key="frame" x="55" y="250" width="262" height="282"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="U4m-tW-eMc">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="U4m-tW-eMc" secondAttribute="trailing" id="HgI-vD-h2x"/>
+                            <constraint firstItem="U4m-tW-eMc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ohg-Iw-1yo"/>
+                            <constraint firstItem="U4m-tW-eMc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YuC-Jk-usT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="U4m-tW-eMc" secondAttribute="bottom" id="dW9-3F-2Sk"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="o3m-wt-JW8">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="zlg-7k-5BP"/>
