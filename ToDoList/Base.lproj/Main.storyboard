@@ -25,7 +25,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="o3m-wt-JW8"/>
+                    <navigationItem key="navigationItem" id="o3m-wt-JW8">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="zlg-7k-5BP"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ge1-nx-lpt"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
