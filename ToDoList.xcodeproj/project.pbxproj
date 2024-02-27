@@ -67,8 +67,8 @@
 				FC579B9D2B8DC01E00099E12 /* LaunchScreen.storyboard */,
 				FC579BA02B8DC01E00099E12 /* Info.plist */,
 				FC579BA62B8DC41A00099E12 /* ListViewController.swift */,
-				FC579BA82B8DC79900099E12 /* ListViewModel.swift */,
 				FC579BAA2B8DE79900099E12 /* AddListViewController.swift */,
+				FC579BA82B8DC79900099E12 /* ListViewModel.swift */,
 			);
 			path = ToDoList;
 			sourceTree = "<group>";

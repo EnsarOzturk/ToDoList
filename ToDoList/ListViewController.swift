@@ -15,7 +15,9 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "TO DO LIST"
+        tableView.dataSource = self
+        tableView.dataSource =  self
+        title = "To Do List"
         self.navigationController?.navigationBar.tintColor = .black
     }
     

@@ -31,7 +31,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="o3m-wt-JW8">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="zlg-7k-5BP"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ge1-nx-lpt">
                             <connections>
                                 <action selector="didTapAdd" destination="BYZ-38-t0r" id="qAP-eX-e3y"/>
@@ -53,13 +52,31 @@
                     <view key="view" contentMode="scaleToFill" id="1Wb-wR-DTO">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ukp-2o-rla">
+                                <rect key="frame" x="20" y="79" width="353" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="l5e-7m-bCH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="D1n-1c-LvP"/>
-                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ukp-2o-rla" firstAttribute="leading" secondItem="D1n-1c-LvP" secondAttribute="leading" constant="20" id="LX6-eR-d9H"/>
+                            <constraint firstItem="Ukp-2o-rla" firstAttribute="top" secondItem="D1n-1c-LvP" secondAttribute="top" constant="20" id="YHH-oq-A0k"/>
+                            <constraint firstItem="D1n-1c-LvP" firstAttribute="trailing" secondItem="Ukp-2o-rla" secondAttribute="trailing" constant="20" id="tyt-KF-W3U"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="Ukp-2o-rla" id="uG4-gd-tBY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r24-gU-i06" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1621" y="5"/>
+            <point key="canvasLocation" x="1620.6106870229007" y="4.9295774647887329"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="asl-Gv-fZQ">
@@ -83,9 +100,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
