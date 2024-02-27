@@ -14,6 +14,7 @@
 		FC579B9F2B8DC01E00099E12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC579B9D2B8DC01E00099E12 /* LaunchScreen.storyboard */; };
 		FC579BA72B8DC41A00099E12 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC579BA62B8DC41A00099E12 /* ListViewController.swift */; };
 		FC579BA92B8DC79900099E12 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC579BA82B8DC79900099E12 /* ListViewModel.swift */; };
+		FC579BAB2B8DE79900099E12 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC579BAA2B8DE79900099E12 /* AddListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		FC579BA02B8DC01E00099E12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC579BA62B8DC41A00099E12 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		FC579BA82B8DC79900099E12 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		FC579BAA2B8DE79900099E12 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				FC579BA02B8DC01E00099E12 /* Info.plist */,
 				FC579BA62B8DC41A00099E12 /* ListViewController.swift */,
 				FC579BA82B8DC79900099E12 /* ListViewModel.swift */,
+				FC579BAA2B8DE79900099E12 /* AddListViewController.swift */,
 			);
 			path = ToDoList;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC579B932B8DC01C00099E12 /* AppDelegate.swift in Sources */,
+				FC579BAB2B8DE79900099E12 /* AddListViewController.swift in Sources */,
 				FC579B952B8DC01C00099E12 /* SceneDelegate.swift in Sources */,
 				FC579BA92B8DC79900099E12 /* ListViewModel.swift in Sources */,
 				FC579BA72B8DC41A00099E12 /* ListViewController.swift in Sources */,
