@@ -55,6 +55,21 @@
             </objects>
             <point key="canvasLocation" x="872.51908396946567" y="4.9295774647887329"/>
         </scene>
+        <!--Content View Controller-->
+        <scene sceneID="pza-65-W72">
+            <objects>
+                <viewController storyboardIdentifier="ContentViewController" id="l0Z-l4-rTw" customClass="ContentViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qrX-bS-oBz">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="cbG-Qj-bcz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="egu-jQ-hMf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="873" y="705"/>
+        </scene>
         <!--Add List View Controller-->
         <scene sceneID="FCQ-rV-Klu">
             <objects>
@@ -104,7 +119,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K7I-Bb-RIP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="135.1145038167939" y="4.9295774647887329"/>
+            <point key="canvasLocation" x="94" y="170"/>
         </scene>
     </scenes>
     <resources>

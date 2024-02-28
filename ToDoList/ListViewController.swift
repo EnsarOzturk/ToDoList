@@ -61,8 +61,8 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let vc = storyboard?.instantiateViewController(identifier: "AddListViewController") as! AddListViewController
-        vc.title = "New Task"
+        let vc = storyboard?.instantiateViewController(identifier: "ContentViewController") as! ContentViewController
+        vc.title = "Content"
         navigationController?.pushViewController(vc, animated: true)
     }
 }
