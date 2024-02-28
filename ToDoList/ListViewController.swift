@@ -15,15 +15,35 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
-        tableView.dataSource =  self
         title = "To Do List"
         self.navigationController?.navigationBar.tintColor = .black
+        tableView.dataSource = self
+        tableView.dataSource =  self
+        
+        if !UserDefaults().bool(forKey: "setup") {
+            UserDefaults().set(true, forKey: "setup")
+            UserDefaults().set(0, forKey: "count")
+        }
+       updateTasks()
+    }
+    
+    
+    
+    func updateTasks() {
+        guard let count = UserDefaults().value(forKey: "count") as? Int else {
+            return
+        }
+ 
     }
     
     @IBAction func didTapAdd() {
         let vc = storyboard?.instantiateViewController(identifier: "AddListViewController") as! AddListViewController
         vc.title = "New Task"
+        vc.update = {
+            DispatchQueue.main.async {
+                self.updateTasks()
+            }
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -45,6 +65,4 @@ extension ListViewController: UITableViewDataSource {
         cell.textLabel?.text = list[indexPath.row]
         return cell
     }
-    
-    
 }

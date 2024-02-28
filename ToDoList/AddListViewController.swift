@@ -9,6 +9,7 @@ import UIKit
 
 class AddListViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var textField: UITextField!
+    var update: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,17 @@ class AddListViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func saveTask() {
+        guard let text = textField.text, !text.isEmpty else { return }
+        
+        guard let count = UserDefaults().value(forKey: "count") as? Int else { return }
+       
+        var newCount = count + 1
+       
+        UserDefaults().setValue(newCount, forKey: "count")
+        UserDefaults().setValue(text, forKey: "task_\(newCount)")
+        update?()
+        
+        navigationController?.popViewController(animated: true)
         
     }
 }
