@@ -8,7 +8,8 @@
 import UIKit
 
 class ContentViewController: UIViewController {
-
+    @IBOutlet var label: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
