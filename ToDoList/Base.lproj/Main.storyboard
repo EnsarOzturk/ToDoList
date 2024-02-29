@@ -62,8 +62,22 @@
                     <view key="view" contentMode="scaleToFill" id="qrX-bS-oBz">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lrn-rL-TVU">
+                                <rect key="frame" x="8" y="79" width="377" height="719"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="cbG-Qj-bcz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Lrn-rL-TVU" firstAttribute="top" secondItem="cbG-Qj-bcz" secondAttribute="top" constant="20" id="GKc-VN-IPn"/>
+                            <constraint firstItem="Lrn-rL-TVU" firstAttribute="leading" secondItem="cbG-Qj-bcz" secondAttribute="leading" constant="8" id="HEr-bt-yLd"/>
+                            <constraint firstItem="cbG-Qj-bcz" firstAttribute="bottom" secondItem="Lrn-rL-TVU" secondAttribute="bottom" constant="20" id="LeV-3n-Eam"/>
+                            <constraint firstItem="cbG-Qj-bcz" firstAttribute="trailing" secondItem="Lrn-rL-TVU" secondAttribute="trailing" constant="8" id="RlS-Yr-37D"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="egu-jQ-hMf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

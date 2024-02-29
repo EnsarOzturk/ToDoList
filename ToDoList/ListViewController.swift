@@ -17,7 +17,7 @@ class ListViewController: UIViewController {
         
         title = "To Do List"
         self.navigationController?.navigationBar.tintColor = .black
-        tableView.dataSource = self
+        tableView.delegate = self
         tableView.dataSource =  self
         
         if !UserDefaults().bool(forKey: "setup") {
