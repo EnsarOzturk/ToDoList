@@ -17,17 +17,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8au-94-qaq">
-                        <rect key="frame" x="0.0" y="0.0" width="439" height="105"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="16" y="8" width="407" height="89"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="8au-94-qaq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="2uN-lr-6iW"/>
-                    <constraint firstAttribute="trailing" secondItem="8au-94-qaq" secondAttribute="trailing" id="TvL-Pg-0zR"/>
-                    <constraint firstAttribute="bottom" secondItem="8au-94-qaq" secondAttribute="bottom" id="r5M-6s-tQl"/>
-                    <constraint firstItem="8au-94-qaq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="yKF-v4-ONY"/>
+                    <constraint firstItem="8au-94-qaq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="2uN-lr-6iW"/>
+                    <constraint firstAttribute="trailing" secondItem="8au-94-qaq" secondAttribute="trailing" constant="16" id="TvL-Pg-0zR"/>
+                    <constraint firstAttribute="bottom" secondItem="8au-94-qaq" secondAttribute="bottom" constant="8" id="r5M-6s-tQl"/>
+                    <constraint firstItem="8au-94-qaq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="yKF-v4-ONY"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

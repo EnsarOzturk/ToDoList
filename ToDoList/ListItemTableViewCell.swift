@@ -13,6 +13,12 @@ class ListItemTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        label.numberOfLines = 0 // Birden fazla satırı destekle
+               label.lineBreakMode = .byWordWrapping // Kelimeleri sarma
+               label.adjustsFontSizeToFitWidth = false // Yazı boyutunu uygun hale getirme
+               label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

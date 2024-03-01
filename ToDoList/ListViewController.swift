@@ -20,14 +20,23 @@ class ListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource =  self
         
-        if !UserDefaults().bool(forKey: "setup") {
-            UserDefaults().set(true, forKey: "setup")
-            UserDefaults().set(0, forKey: "count")
-        }
+        if UserDefaults.standard.value(forKey: "count") == nil {
+            UserDefaults.standard.set(0, forKey: "count")
+    }
        updateTasks()
         
         tableView.register(UINib(nibName: "ListItemTableViewCell", bundle: nil), forCellReuseIdentifier: "ListItemTableViewCell")
+        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = UITableView.automaticDimension // Otomatik hücre yüksekliği
 
+
+    }
+    
+    func saveListToUserDefaults() {
+        UserDefaults.standard.set(list.count, forKey: "count")
+        for (index, task) in list.enumerated() {
+            UserDefaults.standard.set(task, forKey: "task_\(index + 1)")
+        }
     }
     
     
@@ -67,6 +76,19 @@ extension ListViewController: UITableViewDelegate {
         let vc = storyboard?.instantiateViewController(identifier: "ContentViewController") as! ContentViewController
         vc.title = "Content"
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+        return UITableView.automaticDimension
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            list.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            saveListToUserDefaults()
+        }
+        
     }
 }
 
