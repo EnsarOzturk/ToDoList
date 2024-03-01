@@ -16,6 +16,8 @@
 		FC579BA92B8DC79900099E12 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC579BA82B8DC79900099E12 /* ListViewModel.swift */; };
 		FC579BAB2B8DE79900099E12 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC579BAA2B8DE79900099E12 /* AddListViewController.swift */; };
 		FC579BAD2B8F576A00099E12 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC579BAC2B8F576A00099E12 /* ContentViewController.swift */; };
+		FC579BB02B92056200099E12 /* ListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC579BAE2B92056200099E12 /* ListItemTableViewCell.swift */; };
+		FC579BB12B92056200099E12 /* ListItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC579BAF2B92056200099E12 /* ListItemTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		FC579BA82B8DC79900099E12 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		FC579BAA2B8DE79900099E12 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
 		FC579BAC2B8F576A00099E12 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		FC579BAE2B92056200099E12 /* ListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemTableViewCell.swift; sourceTree = "<group>"; };
+		FC579BAF2B92056200099E12 /* ListItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListItemTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,8 @@
 				FC579BAA2B8DE79900099E12 /* AddListViewController.swift */,
 				FC579BA82B8DC79900099E12 /* ListViewModel.swift */,
 				FC579BAC2B8F576A00099E12 /* ContentViewController.swift */,
+				FC579BAE2B92056200099E12 /* ListItemTableViewCell.swift */,
+				FC579BAF2B92056200099E12 /* ListItemTableViewCell.xib */,
 			);
 			path = ToDoList;
 			sourceTree = "<group>";
@@ -134,6 +140,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC579BB12B92056200099E12 /* ListItemTableViewCell.xib in Resources */,
 				FC579B9F2B8DC01E00099E12 /* LaunchScreen.storyboard in Resources */,
 				FC579B9C2B8DC01E00099E12 /* Assets.xcassets in Resources */,
 				FC579B9A2B8DC01C00099E12 /* Main.storyboard in Resources */,
@@ -149,6 +156,7 @@
 			files = (
 				FC579B932B8DC01C00099E12 /* AppDelegate.swift in Sources */,
 				FC579BAB2B8DE79900099E12 /* AddListViewController.swift in Sources */,
+				FC579BB02B92056200099E12 /* ListItemTableViewCell.swift in Sources */,
 				FC579B952B8DC01C00099E12 /* SceneDelegate.swift in Sources */,
 				FC579BA92B8DC79900099E12 /* ListViewModel.swift in Sources */,
 				FC579BAD2B8F576A00099E12 /* ContentViewController.swift in Sources */,
