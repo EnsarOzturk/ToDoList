@@ -25,6 +25,9 @@ class ListViewController: UIViewController {
             UserDefaults().set(0, forKey: "count")
         }
        updateTasks()
+        
+        tableView.register(UINib(nibName: "ListItemTableViewCell", bundle: nil), forCellReuseIdentifier: "ListItemTableViewCell")
+
     }
     
     
@@ -73,8 +76,8 @@ extension ListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = list[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ListItemTableViewCell", for: indexPath) as! ListItemTableViewCell
+        cell.label.text = list[indexPath.row]
         return cell
     }
 }
