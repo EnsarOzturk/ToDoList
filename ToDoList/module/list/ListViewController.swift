@@ -19,6 +19,8 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: ListTableViewCell.identifier)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 40.0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -31,12 +33,11 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         return cell
     }
+    
    
     @IBAction func notesToggleButtonTapped(_ sender: UIBarButtonItem) {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let notesVC = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as? NotesViewController {
-            
+        if let notesVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotesViewController")
+                                                                                            as? NotesViewController {
             notesVC.delegate = self
             navigationController?.pushViewController(notesVC, animated: true)
         }

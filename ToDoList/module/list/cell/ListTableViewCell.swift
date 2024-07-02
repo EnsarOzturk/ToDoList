@@ -16,6 +16,7 @@ class ListTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         label.numberOfLines = 0
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
