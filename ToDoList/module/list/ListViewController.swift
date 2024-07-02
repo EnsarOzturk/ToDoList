@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NotesViewControllerDelegate {
     
     @IBOutlet var tableView: UITableView!
+    var list: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +22,28 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
-    }
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as! ListTableViewCell
+        cell.label.text = list[indexPath.row]
 
+        return cell
+
+    }
+    
+    func saveText(_ text: String) {
+        list.append(text)
+        tableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "showNotes" {
+            if let notesVC = segue.destination as? NotesViewController {
+                notesVC.delegate = self
+            }
+        }
+    }
 }
