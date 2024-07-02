@@ -48,7 +48,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="sKv-kf-JkY">
-                        <barButtonItem key="rightBarButtonItem" image="plus.app.fill" catalog="system" id="xcS-CN-w9h"/>
+                        <barButtonItem key="rightBarButtonItem" image="plus.app.fill" catalog="system" id="xcS-CN-w9h">
+                            <connections>
+                                <action selector="notesToggleButtonTapped:" destination="dvX-ff-LqC" id="blw-Dn-eau"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

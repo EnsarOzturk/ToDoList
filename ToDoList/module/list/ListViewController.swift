@@ -37,13 +37,14 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         list.append(text)
         tableView.reloadData()
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    @IBAction func notesToggleButtonTapped(_ sender: UIBarButtonItem) {
         
-        if segue.identifier == "showNotes" {
-            if let notesVC = segue.destination as? NotesViewController {
-                notesVC.delegate = self
-            }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let notesVC = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as? NotesViewController {
+            
+            notesVC.delegate = self
+            navigationController?.pushViewController(notesVC, animated: true)
         }
     }
 }
+
