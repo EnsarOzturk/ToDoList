@@ -9,6 +9,7 @@ import UIKit
 
 class ListTableViewCell: UITableViewCell {
     @IBOutlet var label: UILabel!
+    static let identifier = "ListTableViewCell"
     
     override func awakeFromNib() {
         super.awakeFromNib()
