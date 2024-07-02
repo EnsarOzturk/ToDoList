@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		FC48A4D02C32CFB000C53509 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4CF2C32CFB000C53509 /* ListViewController.swift */; };
 		FC48A4D42C32E32B00C53509 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4D32C32E32B00C53509 /* ListViewModel.swift */; };
+		FC48A4D72C32E59300C53509 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4D62C32E59300C53509 /* NotesViewController.swift */; };
+		FC48A4D92C32E5B500C53509 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4D82C32E5B500C53509 /* NotesViewModel.swift */; };
+		FC48A4DC2C32E60700C53509 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4DB2C32E60700C53509 /* UserViewController.swift */; };
+		FC48A4DE2C32E61700C53509 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4DD2C32E61700C53509 /* UserViewModel.swift */; };
 		FCD6F6AB2C302223001C906C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD6F6AA2C302223001C906C /* AppDelegate.swift */; };
 		FCD6F6AD2C302223001C906C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD6F6AC2C302223001C906C /* SceneDelegate.swift */; };
 		FCD6F6B22C302223001C906C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD6F6B02C302223001C906C /* Main.storyboard */; };
@@ -19,6 +23,10 @@
 /* Begin PBXFileReference section */
 		FC48A4CF2C32CFB000C53509 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		FC48A4D32C32E32B00C53509 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		FC48A4D62C32E59300C53509 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		FC48A4D82C32E5B500C53509 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
+		FC48A4DB2C32E60700C53509 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		FC48A4DD2C32E61700C53509 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		FCD6F6A72C302223001C906C /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD6F6AA2C302223001C906C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCD6F6AC2C302223001C906C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +51,8 @@
 			isa = PBXGroup;
 			children = (
 				FC48A4D22C32E2EF00C53509 /* list */,
+				FC48A4D52C32E54000C53509 /* notes */,
+				FC48A4DA2C32E5F300C53509 /* user */,
 			);
 			path = module;
 			sourceTree = "<group>";
@@ -54,6 +64,24 @@
 				FC48A4D32C32E32B00C53509 /* ListViewModel.swift */,
 			);
 			path = list;
+			sourceTree = "<group>";
+		};
+		FC48A4D52C32E54000C53509 /* notes */ = {
+			isa = PBXGroup;
+			children = (
+				FC48A4D62C32E59300C53509 /* NotesViewController.swift */,
+				FC48A4D82C32E5B500C53509 /* NotesViewModel.swift */,
+			);
+			path = notes;
+			sourceTree = "<group>";
+		};
+		FC48A4DA2C32E5F300C53509 /* user */ = {
+			isa = PBXGroup;
+			children = (
+				FC48A4DB2C32E60700C53509 /* UserViewController.swift */,
+				FC48A4DD2C32E61700C53509 /* UserViewModel.swift */,
+			);
+			path = user;
 			sourceTree = "<group>";
 		};
 		FCD6F69E2C302223001C906C = {
@@ -157,7 +185,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC48A4DC2C32E60700C53509 /* UserViewController.swift in Sources */,
+				FC48A4DE2C32E61700C53509 /* UserViewModel.swift in Sources */,
 				FCD6F6AB2C302223001C906C /* AppDelegate.swift in Sources */,
+				FC48A4D72C32E59300C53509 /* NotesViewController.swift in Sources */,
+				FC48A4D92C32E5B500C53509 /* NotesViewModel.swift in Sources */,
 				FCD6F6AD2C302223001C906C /* SceneDelegate.swift in Sources */,
 				FC48A4D42C32E32B00C53509 /* ListViewModel.swift in Sources */,
 				FC48A4D02C32CFB000C53509 /* ListViewController.swift in Sources */,
