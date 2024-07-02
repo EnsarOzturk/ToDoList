@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Caf-KV-8Ci">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -31,8 +31,20 @@
                     <view key="view" contentMode="scaleToFill" id="ZVN-X4-Knm">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0vq-4a-Rn0">
+                                <rect key="frame" x="0.0" y="59" width="393" height="710"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="8c8-qI-7pX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8c8-qI-7pX" firstAttribute="bottom" secondItem="0vq-4a-Rn0" secondAttribute="bottom" id="54K-tp-kPD"/>
+                            <constraint firstItem="0vq-4a-Rn0" firstAttribute="top" secondItem="8c8-qI-7pX" secondAttribute="top" id="CYg-K4-ehO"/>
+                            <constraint firstItem="8c8-qI-7pX" firstAttribute="trailing" secondItem="0vq-4a-Rn0" secondAttribute="trailing" id="ZqN-Ye-X0a"/>
+                            <constraint firstItem="0vq-4a-Rn0" firstAttribute="leading" secondItem="8c8-qI-7pX" secondAttribute="leading" id="j1D-IG-8J1"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="list.bullet" catalog="system" id="qHz-PH-N99"/>
                 </viewController>
@@ -50,7 +62,7 @@
                         <viewLayoutGuide key="safeArea" id="nKf-MW-rjI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="note.text" catalog="system" id="XKR-Gj-ZNB"/>
+                    <tabBarItem key="tabBarItem" title="" image="note.text.badge.plus" catalog="system" id="XKR-Gj-ZNB"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byP-iu-Ihs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -78,7 +90,7 @@
     </scenes>
     <resources>
         <image name="list.bullet" catalog="system" width="128" height="87"/>
-        <image name="note.text" catalog="system" width="128" height="107"/>
+        <image name="note.text.badge.plus" catalog="system" width="128" height="109"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
