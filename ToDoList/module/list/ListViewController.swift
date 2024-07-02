@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NotesViewControllerDelegate {
+class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet var tableView: UITableView!
-    var list: [String] = []
-    
+    private var viewModel = ListViewModel()
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,21 +22,18 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        list.count
+        viewModel.list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as! ListTableViewCell
-        cell.label.text = list[indexPath.row]
+        cell.label.text = viewModel.list[indexPath.row]
 
         return cell
 
     }
     
-    func saveText(_ text: String) {
-        list.append(text)
-        tableView.reloadData()
-    }
+   
     @IBAction func notesToggleButtonTapped(_ sender: UIBarButtonItem) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -45,6 +42,14 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
             notesVC.delegate = self
             navigationController?.pushViewController(notesVC, animated: true)
         }
+    }
+}
+
+extension ListViewController: NotesViewControllerDelegate {
+  
+    func saveText(_ text: String) {
+        viewModel.list.append(text)
+        tableView.reloadData()
     }
 }
 
