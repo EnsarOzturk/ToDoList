@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abE-u1-bGZ">
-                        <rect key="frame" x="8" y="4" width="360" height="64"/>
+                        <rect key="frame" x="4" y="4" width="364" height="64"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="0yy-ba-NrD"/>
                         </constraints>
@@ -27,7 +27,7 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="abE-u1-bGZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="3fo-YK-37k"/>
+                    <constraint firstItem="abE-u1-bGZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="CdQ-6b-qnq"/>
                     <constraint firstAttribute="bottom" secondItem="abE-u1-bGZ" secondAttribute="bottom" constant="4" id="Iyn-sj-ndM"/>
                     <constraint firstAttribute="trailing" secondItem="abE-u1-bGZ" secondAttribute="trailing" id="QAi-qq-yD2"/>
                     <constraint firstItem="abE-u1-bGZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="ha4-rI-rJy"/>
@@ -38,7 +38,7 @@
             <connections>
                 <outlet property="label" destination="abE-u1-bGZ" id="Vst-n8-Zbf"/>
             </connections>
-            <point key="canvasLocation" x="62.595419847328245" y="15.140845070422536"/>
+            <point key="canvasLocation" x="62.595419847328245" y="14.788732394366198"/>
         </tableViewCell>
     </objects>
 </document>

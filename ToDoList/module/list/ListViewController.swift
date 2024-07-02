@@ -21,7 +21,13 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: ListTableViewCell.identifier)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 40.0
-    }
+        
+        if let textSave = UserDefaults.standard.stringArray(forKey: "textSave") {
+             viewModel.list = textSave
+         }
+        
+         tableView.reloadData()
+     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.list.count
@@ -49,6 +55,8 @@ extension ListViewController: NotesViewControllerDelegate {
     func saveText(_ text: String) {
         viewModel.list.append(text)
         tableView.reloadData()
+        
+        UserDefaults.standard.set(viewModel.list, forKey: "textSave")
     }
 }
 
