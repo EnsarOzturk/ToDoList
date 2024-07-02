@@ -88,8 +88,15 @@
                     </view>
                     <navigationItem key="navigationItem" id="rJj-mg-Q8Z">
                         <barButtonItem key="leftBarButtonItem" title="cancel" id="BRD-E6-Uxz"/>
-                        <barButtonItem key="rightBarButtonItem" title="save" id="MkA-Zq-UEy"/>
+                        <barButtonItem key="rightBarButtonItem" title="save" id="MkA-Zq-UEy">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="dq2-Ml-FQC" id="Wzd-xO-wzO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="textField" destination="bSR-vI-CaH" id="8Ls-2e-lwH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byP-iu-Ihs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

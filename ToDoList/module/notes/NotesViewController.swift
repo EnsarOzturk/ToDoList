@@ -13,11 +13,18 @@ protocol NotesViewControllerDelegate: AnyObject {
 
 class NotesViewController: UIViewController {
 
+    @IBOutlet var textField: UITextField!
     weak var delegate: NotesViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-   
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        if let text = textField.text, !text.isEmpty {
+            
+            delegate?.saveText(text)
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
