@@ -13,6 +13,8 @@
 		FC48A4D92C32E5B500C53509 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4D82C32E5B500C53509 /* NotesViewModel.swift */; };
 		FC48A4DC2C32E60700C53509 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4DB2C32E60700C53509 /* UserViewController.swift */; };
 		FC48A4DE2C32E61700C53509 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4DD2C32E61700C53509 /* UserViewModel.swift */; };
+		FC48A4E22C340A6F00C53509 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4E02C340A6F00C53509 /* ListCollectionViewCell.swift */; };
+		FC48A4E32C340A6F00C53509 /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC48A4E12C340A6F00C53509 /* ListCollectionViewCell.xib */; };
 		FCD6F6AB2C302223001C906C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD6F6AA2C302223001C906C /* AppDelegate.swift */; };
 		FCD6F6AD2C302223001C906C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD6F6AC2C302223001C906C /* SceneDelegate.swift */; };
 		FCD6F6B22C302223001C906C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD6F6B02C302223001C906C /* Main.storyboard */; };
@@ -27,6 +29,8 @@
 		FC48A4D82C32E5B500C53509 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
 		FC48A4DB2C32E60700C53509 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		FC48A4DD2C32E61700C53509 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		FC48A4E02C340A6F00C53509 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC48A4E12C340A6F00C53509 /* ListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCollectionViewCell.xib; sourceTree = "<group>"; };
 		FCD6F6A72C302223001C906C /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD6F6AA2C302223001C906C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCD6F6AC2C302223001C906C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +66,7 @@
 			children = (
 				FC48A4CF2C32CFB000C53509 /* ListViewController.swift */,
 				FC48A4D32C32E32B00C53509 /* ListViewModel.swift */,
+				FC48A4DF2C3409A800C53509 /* cell */,
 			);
 			path = list;
 			sourceTree = "<group>";
@@ -82,6 +87,15 @@
 				FC48A4DD2C32E61700C53509 /* UserViewModel.swift */,
 			);
 			path = user;
+			sourceTree = "<group>";
+		};
+		FC48A4DF2C3409A800C53509 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				FC48A4E02C340A6F00C53509 /* ListCollectionViewCell.swift */,
+				FC48A4E12C340A6F00C53509 /* ListCollectionViewCell.xib */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		FCD6F69E2C302223001C906C = {
@@ -174,6 +188,7 @@
 			files = (
 				FCD6F6B72C302225001C906C /* LaunchScreen.storyboard in Resources */,
 				FCD6F6B42C302225001C906C /* Assets.xcassets in Resources */,
+				FC48A4E32C340A6F00C53509 /* ListCollectionViewCell.xib in Resources */,
 				FCD6F6B22C302223001C906C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC48A4E22C340A6F00C53509 /* ListCollectionViewCell.swift in Sources */,
 				FC48A4DC2C32E60700C53509 /* UserViewController.swift in Sources */,
 				FC48A4DE2C32E61700C53509 /* UserViewModel.swift in Sources */,
 				FCD6F6AB2C302223001C906C /* AppDelegate.swift in Sources */,
