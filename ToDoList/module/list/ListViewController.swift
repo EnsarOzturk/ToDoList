@@ -15,10 +15,10 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "list"
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: ListTableViewCell.identifier)
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,9 +30,7 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.label.text = viewModel.list[indexPath.row]
 
         return cell
-
     }
-    
    
     @IBAction func notesToggleButtonTapped(_ sender: UIBarButtonItem) {
         

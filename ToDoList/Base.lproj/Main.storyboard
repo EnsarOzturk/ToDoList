@@ -71,23 +71,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bSR-vI-CaH">
-                                <rect key="frame" x="16" y="119" width="361" height="634"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fP9-k4-wcu">
+                                <rect key="frame" x="8" y="119" width="377" height="642"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nKf-MW-rjI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="bSR-vI-CaH" firstAttribute="leading" secondItem="nKf-MW-rjI" secondAttribute="leading" constant="16" id="LZl-k9-KtB"/>
-                            <constraint firstItem="nKf-MW-rjI" firstAttribute="bottom" secondItem="bSR-vI-CaH" secondAttribute="bottom" constant="16" id="R6v-fo-Pxm"/>
-                            <constraint firstItem="bSR-vI-CaH" firstAttribute="top" secondItem="nKf-MW-rjI" secondAttribute="top" constant="16" id="XjS-wF-5ac"/>
-                            <constraint firstItem="nKf-MW-rjI" firstAttribute="trailing" secondItem="bSR-vI-CaH" secondAttribute="trailing" constant="16" id="yC0-SS-5iX"/>
+                            <constraint firstItem="nKf-MW-rjI" firstAttribute="trailing" secondItem="fP9-k4-wcu" secondAttribute="trailing" constant="8" id="74I-oD-VL0"/>
+                            <constraint firstItem="fP9-k4-wcu" firstAttribute="leading" secondItem="nKf-MW-rjI" secondAttribute="leading" constant="8" id="exT-tz-o3a"/>
+                            <constraint firstItem="fP9-k4-wcu" firstAttribute="top" secondItem="nKf-MW-rjI" secondAttribute="top" constant="16" id="ivT-lP-pNH"/>
+                            <constraint firstItem="nKf-MW-rjI" firstAttribute="bottom" secondItem="fP9-k4-wcu" secondAttribute="bottom" constant="8" id="mrv-IN-2DI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rJj-mg-Q8Z">
-                        <barButtonItem key="leftBarButtonItem" title="cancel" id="BRD-E6-Uxz"/>
+                        <barButtonItem key="leftBarButtonItem" title="cancel" image="arrow.backward" catalog="system" id="BRD-E6-Uxz">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="dq2-Ml-FQC" id="xOl-Qr-EK1"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="save" id="MkA-Zq-UEy">
                             <connections>
                                 <action selector="saveButtonTapped:" destination="dq2-Ml-FQC" id="Wzd-xO-wzO"/>
@@ -95,7 +101,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="textField" destination="bSR-vI-CaH" id="8Ls-2e-lwH"/>
+                        <outlet property="textView" destination="fP9-k4-wcu" id="PoI-dA-pNq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byP-iu-Ihs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -161,10 +167,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.backward" catalog="system" width="128" height="95"/>
         <image name="list.bullet" catalog="system" width="128" height="87"/>
         <image name="note.text.badge.plus" catalog="system" width="128" height="109"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="plus.app.fill" catalog="system" width="128" height="114"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
