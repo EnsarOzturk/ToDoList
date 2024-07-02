@@ -27,9 +27,17 @@ class NotesViewController: UIViewController {
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         if let text = textView.text, !text.isEmpty {
-            
             delegate?.saveText(text)
             navigationController?.popViewController(animated: true)
+        } else {
+            textAlert()
         }
     }
+    
+    private func textAlert() {
+        let alertController = UIAlertController(title: "Birşeyler yaz :)", message: "", preferredStyle: .alert)
+           let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+           alertController.addAction(action)
+           present(alertController, animated: true, completion: nil)
+       }
 }

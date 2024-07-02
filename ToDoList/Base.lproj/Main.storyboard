@@ -49,6 +49,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="sKv-kf-JkY">
                         <barButtonItem key="rightBarButtonItem" image="plus.app.fill" catalog="system" id="xcS-CN-w9h">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="notesToggleButtonTapped:" destination="dvX-ff-LqC" id="blw-Dn-eau"/>
                             </connections>
@@ -90,11 +91,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="rJj-mg-Q8Z">
                         <barButtonItem key="leftBarButtonItem" title="cancel" image="arrow.backward" catalog="system" id="BRD-E6-Uxz">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="cancelButtonTapped:" destination="dq2-Ml-FQC" id="xOl-Qr-EK1"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="save" id="MkA-Zq-UEy">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="saveButtonTapped:" destination="dq2-Ml-FQC" id="Wzd-xO-wzO"/>
                             </connections>
