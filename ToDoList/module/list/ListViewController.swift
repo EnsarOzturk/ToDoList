@@ -24,10 +24,11 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         if let textSave = UserDefaults.standard.stringArray(forKey: "textSave") {
              viewModel.list = textSave
+            
          }
         
          tableView.reloadData()
-     }
+        }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.list.count
