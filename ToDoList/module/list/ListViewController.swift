@@ -7,40 +7,26 @@
 
 import UIKit
 
-class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ListViewController: UIViewController {
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var collectionView: UICollectionView!
     private var viewModel = ListViewModel()
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "list"
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: ListTableViewCell.identifier)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 40.0
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
         
         if let textSave = UserDefaults.standard.stringArray(forKey: "textSave") {
              viewModel.list = textSave
             
          }
         
-         tableView.reloadData()
+         collectionView.reloadData()
         }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.list.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as! ListTableViewCell
-        cell.label.text = viewModel.list[indexPath.row]
-
-        return cell
-    }
-    
    
     @IBAction func notesToggleButtonTapped(_ sender: UIBarButtonItem) {
         if let notesVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotesViewController")
@@ -51,11 +37,28 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 }
 
+extension ListViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        viewModel.list.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath) as! ListCollectionViewCell
+        cell.label.text = viewModel.list[indexPath.row]
+        
+        return cell
+    }
+}
+
+extension ListViewController: UICollectionViewDelegate {
+    
+}
+
 extension ListViewController: NotesViewControllerDelegate {
   
     func saveText(_ text: String) {
         viewModel.list.append(text)
-        tableView.reloadData()
+        collectionView.reloadData()
         
         UserDefaults.standard.set(viewModel.list, forKey: "textSave")
     }

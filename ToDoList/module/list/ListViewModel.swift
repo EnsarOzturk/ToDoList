@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol ListViewModelProtocol {
+    
+}
+
 class ListViewModel {
     
     var list: [String] = []
