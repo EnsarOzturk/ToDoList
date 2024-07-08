@@ -22,11 +22,9 @@ class ListViewController: UIViewController {
         
         if let textSave = UserDefaults.standard.getTextArray() {
              viewModel.list = textSave
-            
-         }
-        
+             }
          collectionView.reloadData()
-        }
+       }
    
     @IBAction func notesToggleButtonTapped(_ sender: UIBarButtonItem) {
         if let notesVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotesViewController")
