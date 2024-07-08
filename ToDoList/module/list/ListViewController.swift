@@ -20,7 +20,7 @@ class ListViewController: UIViewController {
         collectionView.delegate = self
         collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
         
-        if let textSave = UserDefaults.standard.stringArray(forKey: "textSave") {
+        if let textSave = UserDefaults.standard.getTextArray() {
              viewModel.list = textSave
             
          }
@@ -37,7 +37,7 @@ class ListViewController: UIViewController {
     }
 }
 
-extension ListViewController: UICollectionViewDataSource {
+extension ListViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.list.count
     }
@@ -50,8 +50,11 @@ extension ListViewController: UICollectionViewDataSource {
     }
 }
 
-extension ListViewController: UICollectionViewDelegate {
-    
+extension ListViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let item = viewModel.list[indexPath.row]
+        return CGSize(width: collectionView.bounds.width, height: 45)
+    }
 }
 
 extension ListViewController: NotesViewControllerDelegate {
@@ -60,7 +63,18 @@ extension ListViewController: NotesViewControllerDelegate {
         viewModel.list.append(text)
         collectionView.reloadData()
         
-        UserDefaults.standard.set(viewModel.list, forKey: "textSave")
+        UserDefaults.standard.setTextArray(viewModel.list)
     }
 }
 
+extension String {
+func height(constraintedWidth width: CGFloat, font: UIFont) -> CGFloat {
+    let label =  UILabel(frame: CGRect(x: 0, y: 0, width: width, height: .greatestFiniteMagnitude))
+    label.numberOfLines = 0
+    label.text = self
+    label.font = font
+    label.sizeToFit()
+
+    return label.frame.height
+ }
+}

@@ -33,7 +33,7 @@
             </constraints>
             <size key="customSize" width="358" height="68"/>
             <connections>
-                <outlet property="label" destination="GdS-aK-VDJ" id="PR2-z3-CzT"/>
+                <outlet property="label" destination="GdS-aK-VDJ" id="AgJ-CC-n4E"/>
             </connections>
             <point key="canvasLocation" x="278" y="18"/>
         </collectionViewCell>

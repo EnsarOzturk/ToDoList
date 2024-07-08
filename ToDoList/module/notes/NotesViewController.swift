@@ -11,7 +11,7 @@ protocol NotesViewControllerDelegate: AnyObject {
     func saveText(_ text: String)
 }
 
-class NotesViewController: UIViewController {
+final class NotesViewController: UIViewController {
 
     @IBOutlet var textView: UITextView!
     weak var delegate: NotesViewControllerDelegate?
@@ -36,14 +36,11 @@ class NotesViewController: UIViewController {
             delegate?.saveText(text)
             navigationController?.popViewController(animated: true)
         } else {
-            textAlert()
+            let alert = UIAlertController.alert(title: "Warning", message: "Write something", actionTitle: "OK") {
+                }
+            present(alert, animated: true)
+            textView.becomeFirstResponder()
+            }
         }
     }
-    
-    private func textAlert() {
-        let alertController = UIAlertController(title: "Write something", message: "", preferredStyle: .alert)
-           let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-           alertController.addAction(action)
-           present(alertController, animated: true, completion: nil)
-       }
-}
+
