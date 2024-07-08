@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+final class ListViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     private var viewModel = ListViewModel()
@@ -17,13 +17,9 @@ class ListViewController: UIViewController {
         
         title = "list"
         collectionView.dataSource = self
-        collectionView.delegate = self
         collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
-        
-        if let textSave = UserDefaults.standard.getTextArray() {
-             viewModel.list = textSave
-             }
-         collectionView.reloadData()
+        viewModel.getTextArray()
+        collectionView.reloadData()
        }
    
     @IBAction func notesToggleButtonTapped(_ sender: UIBarButtonItem) {
@@ -35,7 +31,7 @@ class ListViewController: UIViewController {
     }
 }
 
-extension ListViewController: UICollectionViewDataSource, UICollectionViewDelegate  {
+extension ListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.list.count
     }
@@ -58,10 +54,9 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
 extension ListViewController: NotesViewControllerDelegate {
   
     func saveText(_ text: String) {
-        viewModel.list.append(text)
+        viewModel.saveText(text)
         collectionView.reloadData()
         
-        UserDefaults.standard.setTextArray(viewModel.list)
     }
 }
 
