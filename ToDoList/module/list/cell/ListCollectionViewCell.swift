@@ -40,12 +40,12 @@ class ListCollectionViewCell: UICollectionViewCell {
         }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+        fatalError("error")
+        }
     
+    //awakeFromNib çalışma konusu
     override func awakeFromNib() {
         super.awakeFromNib()
-        print("cell ")
- 
+        print("cell")
     }
 }

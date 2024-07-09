@@ -17,6 +17,7 @@
 		FC48A50D2C36DD9A00C53509 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A50C2C36DD9A00C53509 /* TabBarController.swift */; };
 		FC48A5112C37CAEC00C53509 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A5102C37CAEC00C53509 /* UserDefaults+Extension.swift */; };
 		FC48A5132C37CBAA00C53509 /* Alert+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A5122C37CBAA00C53509 /* Alert+Extension.swift */; };
+		FC48A5192C3DA96900C53509 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A5182C3DA96900C53509 /* String+Extension.swift */; };
 		FCD6F6AB2C302223001C906C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD6F6AA2C302223001C906C /* AppDelegate.swift */; };
 		FCD6F6AD2C302223001C906C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD6F6AC2C302223001C906C /* SceneDelegate.swift */; };
 		FCD6F6B22C302223001C906C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD6F6B02C302223001C906C /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 		FC48A50C2C36DD9A00C53509 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		FC48A5102C37CAEC00C53509 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; usesTabs = 0; };
 		FC48A5122C37CBAA00C53509 /* Alert+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+Extension.swift"; sourceTree = "<group>"; };
+		FC48A5182C3DA96900C53509 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		FCD6F6A72C302223001C906C /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD6F6AA2C302223001C906C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCD6F6AC2C302223001C906C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				FC48A5102C37CAEC00C53509 /* UserDefaults+Extension.swift */,
 				FC48A5122C37CBAA00C53509 /* Alert+Extension.swift */,
+				FC48A5182C3DA96900C53509 /* String+Extension.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				FC48A4DC2C32E60700C53509 /* UserViewController.swift in Sources */,
 				FC48A4DE2C32E61700C53509 /* UserViewModel.swift in Sources */,
 				FC48A5112C37CAEC00C53509 /* UserDefaults+Extension.swift in Sources */,
+				FC48A5192C3DA96900C53509 /* String+Extension.swift in Sources */,
 				FC48A5132C37CBAA00C53509 /* Alert+Extension.swift in Sources */,
 				FC48A50D2C36DD9A00C53509 /* TabBarController.swift in Sources */,
 				FCD6F6AB2C302223001C906C /* AppDelegate.swift in Sources */,

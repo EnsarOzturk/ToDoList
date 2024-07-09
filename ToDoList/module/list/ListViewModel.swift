@@ -10,6 +10,7 @@ import Foundation
 protocol ListViewModelProtocol {
     func numberOfRows() -> Int
     func cellForRowAt(at indexPath: IndexPath) -> String
+    func deleteIndex(at indexPath: IndexPath)
     func saveText(_ text: String)
     func viewDidLoad()
 }
@@ -26,6 +27,11 @@ class ListViewModel: ListViewModelProtocol {
         list[indexPath.row]
     }
     
+    func deleteIndex(at indexPath: IndexPath) {
+        list.remove(at: indexPath.item)
+        saveToUserDefaults()
+    }
+    
     func viewDidLoad() {
         getTextArray()
     }
@@ -38,7 +44,10 @@ class ListViewModel: ListViewModelProtocol {
     
     func saveText(_ text: String) {
         list.append(text)
-        UserDefaults.standard.setTextArray(list)
-        
+        saveToUserDefaults()
        }
+    
+    private func saveToUserDefaults() {
+        UserDefaults.standard.set(list, forKey: "TextArray")
+    }
 }

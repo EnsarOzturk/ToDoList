@@ -42,11 +42,11 @@ final class ListViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
+        collectionView.delegate = self
+        collectionView.register(ListCollectionViewCell.self, forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
         collectionView.backgroundColor = .systemBackground
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
@@ -87,18 +87,13 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension String {
-func height(constraintedWidth width: CGFloat, font: UIFont) -> CGFloat {
-    let label =  UILabel(frame: CGRect(x: 0, y: 0, width: width, height: .greatestFiniteMagnitude))
-    label.numberOfLines = 0
-    label.text = self
-    label.font = font
-    label.sizeToFit()
-
-    return label.frame.height
-   }
+extension ListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.deleteIndex(at: indexPath)
+        print("select")
+        collectionView.reloadData()
+    }
 }
-
 
 extension ListViewController: NotesViewControllerDelegate {
   

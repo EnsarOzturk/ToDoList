@@ -18,7 +18,7 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="358" height="68"/>
-            <point key="canvasLocation" x="278" y="18"/>
+            <point key="canvasLocation" x="277.86259541984731" y="17.605633802816904"/>
         </collectionViewCell>
     </objects>
 </document>

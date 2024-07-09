@@ -53,9 +53,9 @@ final class NotesViewController: UIViewController {
             let alert = UIAlertController.alert(title: "Warning", message: "Write something", actionTitle: "OK") {
                 
                 }
+            
             present(alert, animated: true)
             textView.becomeFirstResponder()
-            
             }
         }
     }
