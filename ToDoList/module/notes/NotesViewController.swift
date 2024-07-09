@@ -13,13 +13,17 @@ protocol NotesViewControllerDelegate: AnyObject {
 
 final class NotesViewController: UIViewController {
 
-    @IBOutlet var textView: UITextView!
+    @IBOutlet private var textView: UITextView!
     weak var delegate: NotesViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "new note"
+        setupTextView()
+    }
+    
+    private func setupTextView() {
         textView.layer.cornerRadius = 6
         textView.tintColor = .black
         textView.layer.borderWidth = 0.2

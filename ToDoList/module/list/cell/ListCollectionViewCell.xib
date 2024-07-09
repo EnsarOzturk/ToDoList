@@ -15,26 +15,9 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="358" height="68"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GdS-aK-VDJ">
-                        <rect key="frame" x="4" y="4" width="350" height="60"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <constraints>
-                <constraint firstItem="GdS-aK-VDJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="JpE-39-YXa"/>
-                <constraint firstItem="GdS-aK-VDJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="RVK-RN-JH9"/>
-                <constraint firstAttribute="trailing" secondItem="GdS-aK-VDJ" secondAttribute="trailing" constant="4" id="ctw-G5-h4o"/>
-                <constraint firstAttribute="bottom" secondItem="GdS-aK-VDJ" secondAttribute="bottom" constant="4" id="hTA-9J-eFL"/>
-            </constraints>
             <size key="customSize" width="358" height="68"/>
-            <connections>
-                <outlet property="label" destination="GdS-aK-VDJ" id="AgJ-CC-n4E"/>
-            </connections>
             <point key="canvasLocation" x="278" y="18"/>
         </collectionViewCell>
     </objects>

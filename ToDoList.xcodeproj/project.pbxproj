@@ -10,7 +10,6 @@
 		FC48A4D02C32CFB000C53509 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4CF2C32CFB000C53509 /* ListViewController.swift */; };
 		FC48A4D42C32E32B00C53509 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4D32C32E32B00C53509 /* ListViewModel.swift */; };
 		FC48A4D72C32E59300C53509 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4D62C32E59300C53509 /* NotesViewController.swift */; };
-		FC48A4D92C32E5B500C53509 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4D82C32E5B500C53509 /* NotesViewModel.swift */; };
 		FC48A4DC2C32E60700C53509 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4DB2C32E60700C53509 /* UserViewController.swift */; };
 		FC48A4DE2C32E61700C53509 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A4DD2C32E61700C53509 /* UserViewModel.swift */; };
 		FC48A50A2C36A9C400C53509 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A5082C36A9C400C53509 /* ListCollectionViewCell.swift */; };
@@ -29,7 +28,6 @@
 		FC48A4CF2C32CFB000C53509 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		FC48A4D32C32E32B00C53509 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		FC48A4D62C32E59300C53509 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
-		FC48A4D82C32E5B500C53509 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
 		FC48A4DB2C32E60700C53509 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		FC48A4DD2C32E61700C53509 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		FC48A5082C36A9C400C53509 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -81,7 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				FC48A4D62C32E59300C53509 /* NotesViewController.swift */,
-				FC48A4D82C32E5B500C53509 /* NotesViewModel.swift */,
 			);
 			path = notes;
 			sourceTree = "<group>";
@@ -233,7 +230,6 @@
 				FC48A50D2C36DD9A00C53509 /* TabBarController.swift in Sources */,
 				FCD6F6AB2C302223001C906C /* AppDelegate.swift in Sources */,
 				FC48A4D72C32E59300C53509 /* NotesViewController.swift in Sources */,
-				FC48A4D92C32E5B500C53509 /* NotesViewModel.swift in Sources */,
 				FCD6F6AD2C302223001C906C /* SceneDelegate.swift in Sources */,
 				FC48A4D42C32E32B00C53509 /* ListViewModel.swift in Sources */,
 				FC48A4D02C32CFB000C53509 /* ListViewController.swift in Sources */,

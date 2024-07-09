@@ -8,16 +8,15 @@
 import Foundation
 
 protocol ListViewModelProtocol {
-    var list: [String] { get set }
     func numberOfRows() -> Int
     func cellForRowAt(at indexPath: IndexPath) -> String
-    func getTextArray()
     func saveText(_ text: String)
+    func viewDidLoad()
 }
 
 class ListViewModel: ListViewModelProtocol {
-    
-    var list: [String] = []
+        
+    private var list: [String] = []
     
     func numberOfRows() -> Int {
         list.count
@@ -28,10 +27,10 @@ class ListViewModel: ListViewModelProtocol {
     }
     
     func viewDidLoad() {
-        
+        getTextArray()
     }
     
-    func getTextArray() {
+    private func getTextArray() {
         if let textSave = UserDefaults.standard.getTextArray() {
             list = textSave
         }
@@ -41,5 +40,5 @@ class ListViewModel: ListViewModelProtocol {
         list.append(text)
         UserDefaults.standard.setTextArray(list)
         
-      }
+       }
 }
