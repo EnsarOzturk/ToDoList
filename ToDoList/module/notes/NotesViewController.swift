@@ -31,20 +31,33 @@ final class NotesViewController: UIViewController {
         textView.becomeFirstResponder()
     }
     
-    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+    private func setupCancelButton() {
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelToggleButtonTapped(_:)))
+        navigationItem.leftBarButtonItem = cancelButton
+    }
+    
+    private func setupSaveButton() {
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(saveToggleButtonTapped(_:)))
+        navigationItem.leftBarButtonItem = saveButton
+    }
+    
+    @objc func cancelToggleButtonTapped(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func saveToggleButtonTapped(_ sender: UIBarButtonItem) {
         if let text = textView.text, !text.isEmpty {
             delegate?.saveText(text)
             navigationController?.popViewController(animated: true)
         } else {
             let alert = UIAlertController.alert(title: "Warning", message: "Write something", actionTitle: "OK") {
+                
                 }
             present(alert, animated: true)
             textView.becomeFirstResponder()
+            
             }
         }
     }
+
 
