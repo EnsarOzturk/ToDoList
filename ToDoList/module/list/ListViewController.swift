@@ -17,11 +17,17 @@ final class ListViewController: UIViewController {
         
         title = "list"
         setupCollection()
+        setupNavigationItem()
         viewModel.viewDidLoad()
         collectionView.reloadData()
         }
-   
-    @IBAction func notesToggleButtonTapped(_ sender: UIBarButtonItem) {
+    
+    private func setupNavigationItem() {
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(notesToggleButtonTapped(_:)))
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
+    @objc func notesToggleButtonTapped(_ sender: UIBarButtonItem) {
         if let notesVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotesViewController")
                                                                                             as? NotesViewController {
             notesVC.delegate = self
@@ -60,7 +66,11 @@ extension ListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath) as! ListCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath) as? ListCollectionViewCell else {
+           
+            return UICollectionViewCell()
+        }
+        
         let text = viewModel.cellForRowAt(at: indexPath)
         cell.configure(with: text)
         

@@ -38,9 +38,6 @@
                     <navigationItem key="navigationItem" id="sKv-kf-JkY">
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="xcS-CN-w9h">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="notesToggleButtonTapped:" destination="dvX-ff-LqC" id="blw-Dn-eau"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
