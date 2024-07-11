@@ -21,6 +21,8 @@ final class NotesViewController: UIViewController {
         
         title = "new note"
         setupTextView()
+        setupSaveButton()
+        setupCancelButton()
     }
     
     private func setupTextView() {
