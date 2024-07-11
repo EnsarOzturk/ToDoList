@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ListViewModelProtocol {
-    func numberOfRows() -> Int
+    var numberOfRows: Int { get }
     func cellForRowAt(at indexPath: IndexPath) -> String
     func deleteIndex(at indexPath: IndexPath)
     func saveText(_ text: String)
@@ -19,8 +19,8 @@ class ListViewModel: ListViewModelProtocol {
         
     private var list: [String] = []
     
-    func numberOfRows() -> Int {
-        list.count
+    var numberOfRows: Int {
+        return list.count
     }
     
     func cellForRowAt(at indexPath: IndexPath) -> String {
