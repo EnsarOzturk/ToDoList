@@ -71,9 +71,7 @@ extension ListViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let text = viewModel.cellForRowAt(at: indexPath)
-        cell.configure(with: text)
-        
+        cell.configure(with: viewModel.cellForRowAt(at: indexPath))
         return cell
     }
 }
