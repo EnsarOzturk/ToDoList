@@ -18,15 +18,15 @@ final class TabBarController: UITabBarController {
     private func initiateTabbarViewControllers() {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         
-        let listViewController = storyBoard.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
+        let listViewController = storyBoard.instantiateViewController(ofType: ListViewController.self)
         let listNavigation = UINavigationController(rootViewController: listViewController)
         listNavigation.tabBarItem = UITabBarItem(title: "list", image: UIImage(systemName: "list.bullet.circle"), tag: 0)
 
-        let notesViewController = storyBoard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
+        let notesViewController = storyBoard.instantiateViewController(ofType: NotesViewController.self)
         let notesNavigation = UINavigationController(rootViewController: notesViewController)
         notesNavigation.tabBarItem = UITabBarItem(title: "notes", image: UIImage(systemName: "plus.circle"), tag: 1)
                 
-        let userViewController = storyBoard.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+        let userViewController = storyBoard.instantiateViewController(ofType: UserViewController.self)
         let userNavigation = UINavigationController(rootViewController: userViewController)
         userNavigation.tabBarItem = UITabBarItem(title: "user", image: UIImage(systemName: "person.circle"), tag: 2)
         

@@ -36,11 +36,13 @@ final class NotesViewController: UIViewController {
     private func setupCancelButton() {
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelToggleButtonTapped(_:)))
         navigationItem.leftBarButtonItem = cancelButton
+        cancelButton.tintColor = .black
     }
     
     private func setupSaveButton() {
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveToggleButtonTapped(_:)))
         navigationItem.rightBarButtonItem = saveButton
+        saveButton.tintColor = .black
     }
     
     @objc func cancelToggleButtonTapped(_ sender: UIBarButtonItem) {
