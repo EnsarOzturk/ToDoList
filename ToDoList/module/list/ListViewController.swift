@@ -9,6 +9,10 @@ import UIKit
 
 final class ListViewController: UIViewController {
     
+    struct Constant {
+        static let systemFontSize: CGFloat = 15
+    }
+    
     private var collectionView: UICollectionView!
     private var viewModel:  ListViewModelProtocol = ListViewModel()
    
@@ -79,7 +83,7 @@ extension ListViewController: UICollectionViewDataSource {
 extension ListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let item = viewModel.cellForRowAt(at: indexPath)
-        let font = UIFont.systemFont(ofSize: 15)
+        let font = UIFont.systemFont(ofSize: Constant.systemFontSize)
         let height = item.height(constraintedWidth: collectionView.bounds.width, font: font)
         return CGSize(width: collectionView.bounds.width, height: max(height, 70))
     }
