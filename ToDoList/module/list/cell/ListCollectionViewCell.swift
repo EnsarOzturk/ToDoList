@@ -9,7 +9,6 @@ import UIKit
 
 class ListCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = "ListCollectionViewCell"
     private let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -93,7 +93,6 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
 extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.deleteIndex(at: indexPath)
-        print("select")
         collectionView.reloadData()
     }
 }
