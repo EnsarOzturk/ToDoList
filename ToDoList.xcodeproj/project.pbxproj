@@ -23,6 +23,7 @@
 		FCD6F6B22C302223001C906C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD6F6B02C302223001C906C /* Main.storyboard */; };
 		FCD6F6B42C302225001C906C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD6F6B32C302225001C906C /* Assets.xcassets */; };
 		FCD6F6B72C302225001C906C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD6F6B52C302225001C906C /* LaunchScreen.storyboard */; };
+		FCE02E432C40181900C42941 /* Storyboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE02E422C40181900C42941 /* Storyboard+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		FCD6F6B32C302225001C906C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCD6F6B62C302225001C906C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FCD6F6B82C302225001C906C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCE02E422C40181900C42941 /* Storyboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboard+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				FC48A5102C37CAEC00C53509 /* UserDefaults+Extension.swift */,
+				FCE02E422C40181900C42941 /* Storyboard+Extension.swift */,
 				FC48A5122C37CBAA00C53509 /* Alert+Extension.swift */,
 				FC48A5182C3DA96900C53509 /* String+Extension.swift */,
 			);
@@ -231,6 +234,7 @@
 				FC48A5112C37CAEC00C53509 /* UserDefaults+Extension.swift in Sources */,
 				FC48A5192C3DA96900C53509 /* String+Extension.swift in Sources */,
 				FC48A5132C37CBAA00C53509 /* Alert+Extension.swift in Sources */,
+				FCE02E432C40181900C42941 /* Storyboard+Extension.swift in Sources */,
 				FC48A50D2C36DD9A00C53509 /* TabBarController.swift in Sources */,
 				FCD6F6AB2C302223001C906C /* AppDelegate.swift in Sources */,
 				FC48A4D72C32E59300C53509 /* NotesViewController.swift in Sources */,

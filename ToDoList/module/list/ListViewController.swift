@@ -28,11 +28,17 @@ final class ListViewController: UIViewController {
     }
     
     @objc func notesToggleButtonTapped(_ sender: UIBarButtonItem) {
-        if let notesVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotesViewController")
-                                                                                            as? NotesViewController {
+        
+        if let notesVC = self.storyboard?.instantiateViewController(ofType: NotesViewController.self) 
+        {
             notesVC.delegate = self
             navigationController?.pushViewController(notesVC, animated: true)
         }
+//        if let notesVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotesViewController")
+//                                                                                            as? NotesViewController {
+//            notesVC.delegate = self
+//            navigationController?.pushViewController(notesVC, animated: true)
+//        }
     }
     
     private func setupCollection() {

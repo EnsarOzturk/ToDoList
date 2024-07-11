@@ -39,8 +39,8 @@ final class NotesViewController: UIViewController {
     }
     
     private func setupSaveButton() {
-        let saveButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(saveToggleButtonTapped(_:)))
-        navigationItem.leftBarButtonItem = saveButton
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveToggleButtonTapped(_:)))
+        navigationItem.rightBarButtonItem = saveButton
     }
     
     @objc func cancelToggleButtonTapped(_ sender: UIBarButtonItem) {
