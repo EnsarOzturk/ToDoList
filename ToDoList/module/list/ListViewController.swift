@@ -11,6 +11,7 @@ final class ListViewController: UIViewController {
     
     struct Constant {
         static let systemFontSize: CGFloat = 15
+        static let maxHeight: CGFloat = 70
     }
     
     private var collectionView: UICollectionView!
@@ -85,7 +86,7 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
         let item = viewModel.cellForRowAt(at: indexPath)
         let font = UIFont.systemFont(ofSize: Constant.systemFontSize)
         let height = item.height(constraintedWidth: collectionView.bounds.width, font: font)
-        return CGSize(width: collectionView.bounds.width, height: max(height, 70))
+        return CGSize(width: collectionView.bounds.width, height: max(height, Constant.maxHeight))
     }
 }
 
