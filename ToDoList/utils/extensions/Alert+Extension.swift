@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIAlertController {
-    class func alert(title: String = "", message: String, actionTitle: String, actionHandler: @escaping () -> Void) -> UIAlertController {
+        func alert(title: String = "", message: String, actionTitle: String, actionHandler: @escaping () -> Void) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: actionTitle, style: .default) { action in
                 actionHandler()

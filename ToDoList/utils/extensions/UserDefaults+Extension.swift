@@ -9,7 +9,7 @@ import Foundation
 
 extension UserDefaults {
     
-    private enum Keys {
+    struct Keys {
         static let textSave = "textSave"
     }
     

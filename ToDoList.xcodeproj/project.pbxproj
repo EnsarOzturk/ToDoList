@@ -66,6 +66,7 @@
 		FC48A4D12C32D1C700C53509 /* module */ = {
 			isa = PBXGroup;
 			children = (
+				FC76459D2C412BBC002DDCC9 /* tabbar */,
 				FC48A4D22C32E2EF00C53509 /* list */,
 				FC48A4D52C32E54000C53509 /* notes */,
 				FC48A4DA2C32E5F300C53509 /* user */,
@@ -130,6 +131,14 @@
 			path = extensions;
 			sourceTree = "<group>";
 		};
+		FC76459D2C412BBC002DDCC9 /* tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				FC48A50C2C36DD9A00C53509 /* TabBarController.swift */,
+			);
+			path = tabbar;
+			sourceTree = "<group>";
+		};
 		FCD6F69E2C302223001C906C = {
 			isa = PBXGroup;
 			children = (
@@ -151,7 +160,6 @@
 			children = (
 				FC48A50E2C37C9E500C53509 /* utils */,
 				FC48A4D12C32D1C700C53509 /* module */,
-				FC48A50C2C36DD9A00C53509 /* TabBarController.swift */,
 				FCD6F6AA2C302223001C906C /* AppDelegate.swift */,
 				FCD6F6AC2C302223001C906C /* SceneDelegate.swift */,
 				FCD6F6B02C302223001C906C /* Main.storyboard */,

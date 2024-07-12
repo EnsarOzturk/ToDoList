@@ -54,12 +54,10 @@ final class NotesViewController: UIViewController {
             delegate?.saveText(text)
             navigationController?.popViewController(animated: true)
         } else {
-            let alert = UIAlertController.alert(title: "Warning", message: "Write something", actionTitle: "OK") {
-                
+            let alert = UIAlertController().alert(title: "Warning", message: "please write something", actionTitle: "OK") {
+                self.textView.becomeFirstResponder()
                 }
-            
-            present(alert, animated: true)
-            textView.becomeFirstResponder()
+            self.present(alert, animated: true, completion: nil)
             }
         }
     }
