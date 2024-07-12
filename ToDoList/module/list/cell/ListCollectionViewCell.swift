@@ -25,6 +25,10 @@ class ListCollectionViewCell: UICollectionViewCell {
         setupLabelConstraints()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func setupLabelConstraints() {
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
@@ -37,14 +41,11 @@ class ListCollectionViewCell: UICollectionViewCell {
     func configure(with text: String) {
         label.text = text
         }
-    
-    required init?(coder: NSCoder) {
-        fatalError("error")
-        }
-    
-    //awakeFromNib çalışma konusu
+  
     override func awakeFromNib() {
         super.awakeFromNib()
-        print("cell")
+        
+        layer.borderWidth = 3
+        layer.borderColor = UIColor.black.cgColor
     }
 }

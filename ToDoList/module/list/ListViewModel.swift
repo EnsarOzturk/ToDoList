@@ -18,6 +18,11 @@ protocol ListViewModelProtocol {
 class ListViewModel: ListViewModelProtocol {
         
     private var list: [String] = []
+    weak var view: ListViewProtocol?
+    
+    init(view: ListViewProtocol) {
+        self.view = view
+    }
     
     var numberOfRows: Int {
         return list.count
@@ -34,6 +39,7 @@ class ListViewModel: ListViewModelProtocol {
     
     func viewDidLoad() {
         getTextArray()
+        view?.reloadData()
     }
     
     private func getTextArray() {
@@ -45,6 +51,7 @@ class ListViewModel: ListViewModelProtocol {
     func saveText(_ text: String) {
         list.append(text)
         saveToUserDefaults()
+        view?.reloadData()
        }
     
     private func saveToUserDefaults() {

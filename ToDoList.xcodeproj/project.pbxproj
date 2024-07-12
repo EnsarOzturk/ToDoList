@@ -25,6 +25,7 @@
 		FCD6F6B72C302225001C906C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD6F6B52C302225001C906C /* LaunchScreen.storyboard */; };
 		FCE02E432C40181900C42941 /* Storyboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE02E422C40181900C42941 /* Storyboard+Extension.swift */; };
 		FCE02E452C40745C00C42941 /* Identifier+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE02E442C40745C00C42941 /* Identifier+Extension.swift */; };
+		FCE02E472C4075C500C42941 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE02E462C4075C500C42941 /* NotesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		FCD6F6B82C302225001C906C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCE02E422C40181900C42941 /* Storyboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboard+Extension.swift"; sourceTree = "<group>"; };
 		FCE02E442C40745C00C42941 /* Identifier+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Identifier+Extension.swift"; sourceTree = "<group>"; };
+		FCE02E462C4075C500C42941 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				FC48A4D62C32E59300C53509 /* NotesViewController.swift */,
+				FCE02E462C4075C500C42941 /* NotesViewModel.swift */,
 			);
 			path = notes;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				FCD6F6AB2C302223001C906C /* AppDelegate.swift in Sources */,
 				FC48A4D72C32E59300C53509 /* NotesViewController.swift in Sources */,
 				FCD6F6AD2C302223001C906C /* SceneDelegate.swift in Sources */,
+				FCE02E472C4075C500C42941 /* NotesViewModel.swift in Sources */,
 				FC48A4D42C32E32B00C53509 /* ListViewModel.swift in Sources */,
 				FCE02E452C40745C00C42941 /* Identifier+Extension.swift in Sources */,
 				FC48A4D02C32CFB000C53509 /* ListViewController.swift in Sources */,

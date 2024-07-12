@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ListViewProtocol: AnyObject {
+    func reloadData()
+}
+
 final class ListViewController: UIViewController {
     
     struct Constant {
@@ -15,10 +19,11 @@ final class ListViewController: UIViewController {
     }
     
     private var collectionView: UICollectionView!
-    private var viewModel:  ListViewModelProtocol = ListViewModel()
+    var viewModel: ListViewModelProtocol!
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         title = "list"
         setupCollection()
@@ -92,8 +97,7 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
 
 extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.deleteIndex(at: indexPath)
-        collectionView.reloadData()
+        
     }
 }
 
@@ -101,6 +105,11 @@ extension ListViewController: NotesViewControllerDelegate {
   
     func saveText(_ text: String) {
         viewModel.saveText(text)
+    }
+}
+
+extension ListViewController: ListViewProtocol {
+    func reloadData() {
         collectionView.reloadData()
     }
 }

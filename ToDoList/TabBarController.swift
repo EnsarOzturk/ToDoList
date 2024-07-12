@@ -19,6 +19,8 @@ final class TabBarController: UITabBarController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         
         let listViewController = storyBoard.instantiateViewController(ofType: ListViewController.self)
+        let listViewModel = ListViewModel(view: listViewController)
+        listViewController.viewModel = listViewModel
         let listNavigation = UINavigationController(rootViewController: listViewController)
         listNavigation.tabBarItem = UITabBarItem(title: "list", image: UIImage(systemName: "list.bullet.circle"), tag: 0)
 
