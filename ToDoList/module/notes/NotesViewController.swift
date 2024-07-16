@@ -15,6 +15,7 @@ final class NotesViewController: UIViewController {
 
     @IBOutlet private var textView: UITextView!
     weak var delegate: NotesViewControllerDelegate?
+    private let viewModel = NotesViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +51,8 @@ final class NotesViewController: UIViewController {
     }
     
     @objc func saveToggleButtonTapped(_ sender: UIBarButtonItem) {
-        if let text = textView.text, !text.isEmpty {
-            delegate?.saveText(text)
+        if viewModel.textValidate(textView.text) {
+            delegate?.saveText(textView.text)
             navigationController?.popViewController(animated: true)
         } else {
             let alert = UIAlertController().alert(title: "Warning", message: "please write something", actionTitle: "OK") {
