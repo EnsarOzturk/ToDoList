@@ -14,8 +14,8 @@ protocol ListViewProtocol: AnyObject {
 final class ListViewController: UIViewController {
     
     struct Constant {
-        static let systemFontSize: CGFloat = 15
-        static let maxHeight: CGFloat = 70
+        static let systemFontSize: Double = 15
+        static let maxHeight: Double = 70
     }
     
     private var collectionView: UICollectionView!
