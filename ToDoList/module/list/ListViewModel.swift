@@ -43,7 +43,7 @@ class ListViewModel: ListViewModelProtocol {
     }
     
     private func getTextArray() {
-        if let textSave = UserDefaults.standard.getTextArray() {
+        if let textSave = UserDefaults.standard.get(forKey: .textSave) {
             list = textSave
         }
     }
@@ -55,6 +55,6 @@ class ListViewModel: ListViewModelProtocol {
        }
     
     private func saveToUserDefaults() {
-        UserDefaults.standard.set(list, forKey: "TextArray")
+        UserDefaults.standard.set(list, forKey: .textSave)
     }
 }
