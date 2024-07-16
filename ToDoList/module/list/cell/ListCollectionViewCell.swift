@@ -48,4 +48,10 @@ class ListCollectionViewCell: UICollectionViewCell {
         layer.borderWidth = 3
         layer.borderColor = UIColor.black.cgColor
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        label.text = nil
+    }
 }
