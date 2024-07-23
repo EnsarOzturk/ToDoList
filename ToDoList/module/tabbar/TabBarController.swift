@@ -8,7 +8,7 @@
 import UIKit
 
 final class TabBarController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,21 +17,25 @@ final class TabBarController: UITabBarController {
     
     private func initiateTabbarViewControllers() {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let tabbarItems: [(viewControllerType: UIViewController.Type, title: String, imageName: String, tag: Int)] = [
+            (ListViewController.self, "list", "list.bullet.circle", 0),
+            (NotesViewController.self, "notes", "plus.circle", 1),
+            (UserViewController.self, "user", "person.circle", 2)
+        ]
         
-        let listViewController = storyBoard.instantiateViewController(ofType: ListViewController.self)
-        let listViewModel = ListViewModel(view: listViewController)
-        listViewController.viewModel = listViewModel
-        let listNavigation = UINavigationController(rootViewController: listViewController)
-        listNavigation.tabBarItem = UITabBarItem(title: "list", image: UIImage(systemName: "list.bullet.circle"), tag: 0)
-
-        let notesViewController = storyBoard.instantiateViewController(ofType: NotesViewController.self)
-        let notesNavigation = UINavigationController(rootViewController: notesViewController)
-        notesNavigation.tabBarItem = UITabBarItem(title: "notes", image: UIImage(systemName: "plus.circle"), tag: 1)
-                
-        let userViewController = storyBoard.instantiateViewController(ofType: UserViewController.self)
-        let userNavigation = UINavigationController(rootViewController: userViewController)
-        userNavigation.tabBarItem = UITabBarItem(title: "user", image: UIImage(systemName: "person.circle"), tag: 2)
-        
-        viewControllers = [listNavigation, notesNavigation, userNavigation]
+        var viewControllers: [UIViewController] = []
+        for tabbarItems in tabbarItems {
+            let viewController = storyBoard.instantiateViewController(ofType: tabbarItems.viewControllerType)
+            
+            if let listVC = viewController as? ListViewController {
+                let listViewModel = ListViewModel(view: listVC, delegate: listVC)
+                listVC.viewModel = listViewModel
+            }
+            let navigationController = UINavigationController(rootViewController: viewController)
+                navigationController.tabBarItem = UITabBarItem(title: tabbarItems.title, image: UIImage(systemName: tabbarItems.imageName), tag: tabbarItems.tag)
+                viewControllers.append(navigationController)
+        }
+            self.viewControllers = viewControllers
     }
 }
+

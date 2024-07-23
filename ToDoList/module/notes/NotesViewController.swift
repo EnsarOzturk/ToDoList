@@ -12,6 +12,12 @@ protocol NotesViewControllerDelegate: AnyObject {
 }
 
 final class NotesViewController: UIViewController {
+    
+    struct Constant {
+        static let radius: Double = 6
+        static let borderWidth: Double = 0.2
+        static let title: String = "Notes"
+    }
 
     @IBOutlet private var textView: UITextView!
     weak var delegate: NotesViewControllerDelegate?
@@ -20,47 +26,56 @@ final class NotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "new note"
+        title = Constant.title
+        viewModel.delegate = self
+        viewModel.setupButtons()
         setupTextView()
-        setupSaveButton()
-        setupCancelButton()
     }
     
     private func setupTextView() {
-        textView.layer.cornerRadius = 6
+        textView.layer.cornerRadius = Constant.radius
+        textView.layer.borderWidth = Constant.borderWidth
         textView.tintColor = .black
-        textView.layer.borderWidth = 0.2
         textView.layer.borderColor = UIColor.darkGray.cgColor
         textView.becomeFirstResponder()
     }
     
-    private func setupCancelButton() {
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelToggleButtonTapped(_:)))
+    @objc func cancelToggleButtonTapped(_ sender: UIBarButtonItem) {
+        viewModel.cancelButtonTapped()
+    }
+    
+    @objc func saveToggleButtonTapped(_ sender: UIBarButtonItem) {
+        viewModel.saveButtonTapped(text: textView.text)
+    }
+}
+
+extension NotesViewController: NotesViewModelDelegate {
+    func popViewController() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController().alert(title: "Warning", message: "please write something", actionTitle: "OK") {
+            self.textView.becomeFirstResponder()
+        }
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func saveText(_ text: String) {
+        delegate?.saveText(text)
+    }
+    
+    func setupCancelButton(action: Selector) {
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: action)
         navigationItem.leftBarButtonItem = cancelButton
         cancelButton.tintColor = .black
     }
     
-    private func setupSaveButton() {
-        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveToggleButtonTapped(_:)))
+    func setupSaveButton(action: Selector) {
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: action)
         navigationItem.rightBarButtonItem = saveButton
         saveButton.tintColor = .black
     }
-    
-    @objc func cancelToggleButtonTapped(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func saveToggleButtonTapped(_ sender: UIBarButtonItem) {
-        if viewModel.textValidate(textView.text) {
-            delegate?.saveText(textView.text)
-            navigationController?.popViewController(animated: true)
-        } else {
-            let alert = UIAlertController().alert(title: "Warning", message: "please write something", actionTitle: "OK") {
-                self.textView.becomeFirstResponder()
-                }
-            self.present(alert, animated: true, completion: nil)
-            }
-        }
-    }
+}
 
 

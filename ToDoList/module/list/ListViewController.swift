@@ -9,13 +9,15 @@ import UIKit
 
 protocol ListViewProtocol: AnyObject {
     func reloadData()
+    func navigateToNotesViewController()
+    func addButtonAction()
 }
 
 final class ListViewController: UIViewController {
     
     struct Constant {
-        static let systemFontSize: Double = 15
-        static let maxHeight: Double = 70
+        static let zero: Double = 0
+        static let title: String = "List"
     }
     
     private var collectionView: UICollectionView!
@@ -24,34 +26,24 @@ final class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        title = "list"
+        title = Constant.title
         setupCollection()
-        setupNavigationItem()
+        viewModel = ListViewModel(view: self, delegate: self)
         viewModel.viewDidLoad()
         collectionView.reloadData()
         }
     
-    private func setupNavigationItem() {
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(notesToggleButtonTapped(_:)))
-        navigationItem.rightBarButtonItem = addButton
+    @objc func addButtonAction() {
+        viewModel.addButtonTapped()
     }
-    
-    @objc func notesToggleButtonTapped(_ sender: UIBarButtonItem) {
-        if let notesVC = self.storyboard?.instantiateViewController(ofType: NotesViewController.self)
-            {
-            notesVC.delegate = self
-            navigationController?.pushViewController(notesVC, animated: true)
-            }
-        }
     
     private func setupCollection() {
         let layout = UICollectionViewFlowLayout()
         
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: Constant.zero, left: Constant.zero, bottom: Constant.zero, right: Constant.zero)
+        layout.minimumInteritemSpacing = Constant.zero
+        layout.minimumLineSpacing = Constant.zero
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
@@ -81,23 +73,19 @@ extension ListViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.configure(with: viewModel.cellForRowAt(at: indexPath))
+        let text = viewModel.cellForRowAt(at: indexPath)
+        let key = UserDefaultsKey.itemState(indexPath: indexPath)
+        let isChecked = UserDefaultsClass.shared.get(forKey: key)
+        
+        cell.configure(with: text, isChecked: isChecked, indexPath: indexPath)
         return cell
     }
 }
 
 extension ListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let item = viewModel.cellForRowAt(at: indexPath)
-        let font = UIFont.systemFont(ofSize: Constant.systemFontSize)
-        let height = item.height(constraintedWidth: collectionView.bounds.width, font: font)
-        return CGSize(width: collectionView.bounds.width, height: max(height, Constant.maxHeight))
-    }
-}
-
-extension ListViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+       
+        return viewModel.sizeForItemAt(indexPath: indexPath, collectionViewWidth: collectionView.bounds.width)
     }
 }
 
@@ -109,8 +97,23 @@ extension ListViewController: NotesViewControllerDelegate {
 }
 
 extension ListViewController: ListViewProtocol {
+    func navigateToNotesViewController() {
+        if let notesVC = self.storyboard?.instantiateViewController(ofType: NotesViewController.self) {
+            notesVC.delegate = self
+            navigationController?.pushViewController(notesVC, animated: true)
+        }
+    }
+    
     func reloadData() {
         collectionView.reloadData()
+    }
+}
+
+extension ListViewController: ListViewModelDelegate {
+    func setupAddButton(action: Selector) {
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: action)
+        addButton.tintColor = .black
+        navigationItem.rightBarButtonItem = addButton
     }
 }
 

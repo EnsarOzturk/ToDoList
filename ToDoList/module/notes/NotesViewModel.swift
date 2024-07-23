@@ -7,12 +7,38 @@
 
 import Foundation
 
-class NotesViewModel {
+protocol NotesViewModelDelegate: AnyObject {
+    func popViewController()
+    func showAlert()
+    func saveText(_ text: String)
+    func setupCancelButton(action: Selector)
+    func setupSaveButton(action: Selector)
+}
+
+final class NotesViewModel {
+    
+    weak var delegate: NotesViewModelDelegate?
    
     func textValidate(_ text: String?) -> Bool {
-        guard let text = text, !text.isEmpty else {
-            return false
-        }
+        guard let text = text, !text.trimmingCharacters(in: .whitespaces).isEmpty else { return false }
         return true
+    }
+    
+    func cancelButtonTapped() {
+        delegate?.popViewController()
+    }
+    
+    func saveButtonTapped(text: String) {
+        if textValidate(text) {
+            delegate?.saveText(text)
+            delegate?.popViewController()
+        } else {
+            delegate?.showAlert()
+        }
+    }
+    
+    func setupButtons() {
+        delegate?.setupCancelButton(action: #selector(NotesViewController.cancelToggleButtonTapped(_:)))
+        delegate?.setupSaveButton(action: #selector(NotesViewController.saveToggleButtonTapped(_:)))
     }
 }
