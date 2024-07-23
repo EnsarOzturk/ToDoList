@@ -60,6 +60,15 @@ final class ListViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+    
+    private func deleteItem(at indexPath: IndexPath) {
+            viewModel.deleteItem(at: indexPath)
+            collectionView.performBatchUpdates({
+                collectionView.deleteItems(at: [indexPath])
+            }, completion: { _ in
+                self.viewModel.saveChanges()
+        })
+    }
 }
 
 extension ListViewController: UICollectionViewDataSource {
@@ -87,6 +96,21 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
        
         return viewModel.sizeForItemAt(indexPath: indexPath, collectionViewWidth: collectionView.bounds.width)
     }
+}
+
+extension ListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        func collectionView(_ collectionView: UICollectionView, trailingSwipeActionsConfigurationForItemAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+                        self?.deleteItem(at: indexPath)
+                        completionHandler(true)
+                    }
+            let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+            configuration.performsFirstActionWithFullSwipe = false
+            return UISwipeActionsConfiguration(actions: [deleteAction])
+        }
+    }
+  
 }
 
 extension ListViewController: NotesViewControllerDelegate {

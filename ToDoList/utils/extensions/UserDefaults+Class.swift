@@ -47,4 +47,8 @@ class UserDefaultsClass {
     func get(forKey key: String) -> Bool {
         return defaults.bool(forKey: key)
     }
+    
+    func remove(forKey key: String) {
+        defaults.removeObject(forKey: key)
+    }
 }

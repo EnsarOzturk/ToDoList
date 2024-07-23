@@ -20,9 +20,26 @@ protocol ListViewModelProtocol {
     func viewDidLoad()
     func addButtonTapped()
     func sizeForItemAt(indexPath: IndexPath, collectionViewWidth: CGFloat) -> CGSize
+    func deleteItem(at indexPath: IndexPath)
+    func saveChanges()
 }
 
 final class ListViewModel: ListViewModelProtocol {
+    func deleteItem(at indexPath: IndexPath) {
+        list.remove(at: indexPath.row)
+        let key = UserDefaultsKey.itemState(indexPath: indexPath)
+        UserDefaultsClass.shared.remove(forKey: key)
+    }
+    
+    func saveChanges() {
+        
+        for (index, item) in items.enumerated() {
+            let indexPath = IndexPath(row: index, section: 0)
+            let key = UserDefaultsKey.itemState(indexPath: indexPath)
+            UserDefaultsClass.shared.set(true, forKey: key)
+        }
+    }
+    
     
     struct Constant {
         static let systemFontSize: Double = 15
@@ -30,6 +47,7 @@ final class ListViewModel: ListViewModelProtocol {
     }
             
     private var list: [String] = []
+    private var items: [String] = []
     weak var view: ListViewProtocol?
     weak var delegate: ListViewModelDelegate?
     private let userDefaultsClass = UserDefaultsClass.shared
