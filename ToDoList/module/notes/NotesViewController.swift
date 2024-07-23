@@ -11,39 +11,71 @@ protocol NotesViewControllerDelegate: AnyObject {
     func saveText(_ text: String)
 }
 
-class NotesViewController: UIViewController {
+final class NotesViewController: UIViewController {
+    
+    struct Constant {
+        static let radius: Double = 6
+        static let borderWidth: Double = 0.2
+        static let title: String = "Notes"
+    }
 
-    @IBOutlet var textView: UITextView!
+    @IBOutlet private var textView: UITextView!
     weak var delegate: NotesViewControllerDelegate?
+    private let viewModel = NotesViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "new note"
-        textView.layer.cornerRadius = 6
+        title = Constant.title
+        viewModel.delegate = self
+        viewModel.setupButtons()
+        setupTextView()
+    }
+    
+    private func setupTextView() {
+        textView.layer.cornerRadius = Constant.radius
+        textView.layer.borderWidth = Constant.borderWidth
         textView.tintColor = .black
-        textView.layer.borderWidth = 0.2
         textView.layer.borderColor = UIColor.darkGray.cgColor
         textView.becomeFirstResponder()
     }
     
-    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func cancelToggleButtonTapped(_ sender: UIBarButtonItem) {
+        viewModel.cancelButtonTapped()
+    }
+    
+    @objc func saveToggleButtonTapped(_ sender: UIBarButtonItem) {
+        viewModel.saveButtonTapped(text: textView.text)
+    }
+}
+
+extension NotesViewController: NotesViewModelDelegate {
+    func popViewController() {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        if let text = textView.text, !text.isEmpty {
-            delegate?.saveText(text)
-            navigationController?.popViewController(animated: true)
-        } else {
-            textAlert()
+    func showAlert() {
+        let alert = UIAlertController().alert(title: "Warning", message: "please write something", actionTitle: "OK") {
+            self.textView.becomeFirstResponder()
         }
+        self.present(alert, animated: true, completion: nil)
     }
     
-    private func textAlert() {
-        let alertController = UIAlertController(title: "Write something", message: "", preferredStyle: .alert)
-           let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-           alertController.addAction(action)
-           present(alertController, animated: true, completion: nil)
-       }
+    func saveText(_ text: String) {
+        delegate?.saveText(text)
+    }
+    
+    func setupCancelButton(action: Selector) {
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: action)
+        navigationItem.leftBarButtonItem = cancelButton
+        cancelButton.tintColor = .black
+    }
+    
+    func setupSaveButton(action: Selector) {
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: action)
+        navigationItem.rightBarButtonItem = saveButton
+        saveButton.tintColor = .black
+    }
 }
+
+
