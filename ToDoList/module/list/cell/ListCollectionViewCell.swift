@@ -86,8 +86,7 @@ class ListCollectionViewCell: UICollectionViewCell {
     
     private func saveToUserDefaults() {
         guard let indexPath = indexPath else { return }
-        let key = UserDefaultsKey.itemState(indexPath: indexPath)
-        UserDefaultsClass.shared.set(isChecked, forKey: key)
+        UserDefaultsClass.shared.set(isChecked, forKey: .textSave)
     }
     
     func configure(with text: String, isChecked: Bool, indexPath: IndexPath) {

@@ -83,8 +83,7 @@ extension ListViewController: UICollectionViewDataSource {
         }
         
         let text = viewModel.cellForRowAt(at: indexPath)
-        let key = UserDefaultsKey.itemState(indexPath: indexPath)
-        let isChecked = UserDefaultsClass.shared.get(forKey: key)
+        let isChecked: Bool = UserDefaultsClass.shared.get(forKey: .textSave)
         
         cell.configure(with: text, isChecked: isChecked, indexPath: indexPath)
         return cell
@@ -110,7 +109,6 @@ extension ListViewController: UICollectionViewDelegate {
             return UISwipeActionsConfiguration(actions: [deleteAction])
         }
     }
-  
 }
 
 extension ListViewController: NotesViewControllerDelegate {
@@ -134,6 +132,23 @@ extension ListViewController: ListViewProtocol {
 }
 
 extension ListViewController: ListViewModelDelegate {
+    func setupCollectionView(with layout: UICollectionViewFlowLayout) {
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(ListCollectionViewCell.self, forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
+        collectionView.backgroundColor = .systemBackground
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+    
     func setupAddButton(action: Selector) {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: action)
         addButton.tintColor = .black

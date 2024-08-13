@@ -25,27 +25,26 @@ protocol ListViewModelProtocol {
 }
 
 final class ListViewModel: ListViewModelProtocol {
+    
+    struct Constant {
+        static let systemFontSize: Double = 15
+        static let maxHeight: Double = 70
+        static let zero: Double = 0
+    }
+    
     func deleteItem(at indexPath: IndexPath) {
         list.remove(at: indexPath.row)
-        let key = UserDefaultsKey.itemState(indexPath: indexPath)
-        UserDefaultsClass.shared.remove(forKey: key)
+        UserDefaultsClass.shared.remove(forKey: .textSave)
     }
     
     func saveChanges() {
         
         for (index, item) in items.enumerated() {
             let indexPath = IndexPath(row: index, section: 0)
-            let key = UserDefaultsKey.itemState(indexPath: indexPath)
-            UserDefaultsClass.shared.set(true, forKey: key)
+            UserDefaultsClass.shared.set(true, forKey: .textSave)
         }
     }
-    
-    
-    struct Constant {
-        static let systemFontSize: Double = 15
-        static let maxHeight: Double = 70
-    }
-            
+
     private var list: [String] = []
     private var items: [String] = []
     weak var view: ListViewProtocol?
