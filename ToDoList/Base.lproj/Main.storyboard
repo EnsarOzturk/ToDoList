@@ -24,6 +24,21 @@
             </objects>
             <point key="canvasLocation" x="4858.7786259541981" y="-468.3098591549296"/>
         </scene>
+        <!--Movie List View Controller-->
+        <scene sceneID="kvH-c3-wt3">
+            <objects>
+                <viewController storyboardIdentifier="MovieListViewController" id="A1w-T3-NKJ" customClass="MovieListViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rc8-oz-saN">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="UUL-Pg-EPb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5qU-f3-kvc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5601" y="-468"/>
+        </scene>
         <!--List View Controller-->
         <scene sceneID="I6d-AA-Ppr">
             <objects>

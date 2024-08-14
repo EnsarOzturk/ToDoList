@@ -19,6 +19,7 @@
 		FC48A5132C37CBAA00C53509 /* Alert+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A5122C37CBAA00C53509 /* Alert+Extension.swift */; };
 		FC48A5192C3DA96900C53509 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48A5182C3DA96900C53509 /* String+Extension.swift */; };
 		FC7645A02C4FE01C002DDCC9 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC76459F2C4FE01C002DDCC9 /* Model.swift */; };
+		FCAD95232C6CCB3D006A6493 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD95222C6CCB3D006A6493 /* MovieListViewController.swift */; };
 		FCD6F6AB2C302223001C906C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD6F6AA2C302223001C906C /* AppDelegate.swift */; };
 		FCD6F6AD2C302223001C906C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD6F6AC2C302223001C906C /* SceneDelegate.swift */; };
 		FCD6F6B22C302223001C906C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD6F6B02C302223001C906C /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		FC48A5122C37CBAA00C53509 /* Alert+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+Extension.swift"; sourceTree = "<group>"; };
 		FC48A5182C3DA96900C53509 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		FC76459F2C4FE01C002DDCC9 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		FCAD95222C6CCB3D006A6493 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		FCD6F6A72C302223001C906C /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD6F6AA2C302223001C906C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCD6F6AC2C302223001C906C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				FC48A4D22C32E2EF00C53509 /* list */,
 				FC48A4D52C32E54000C53509 /* notes */,
 				FC48A4DA2C32E5F300C53509 /* user */,
+				FCAD95242C6CCB49006A6493 /* movie */,
 			);
 			path = module;
 			sourceTree = "<group>";
@@ -148,6 +151,14 @@
 				FC76459F2C4FE01C002DDCC9 /* Model.swift */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		FCAD95242C6CCB49006A6493 /* movie */ = {
+			isa = PBXGroup;
+			children = (
+				FCAD95222C6CCB3D006A6493 /* MovieListViewController.swift */,
+			);
+			path = movie;
 			sourceTree = "<group>";
 		};
 		FCD6F69E2C302223001C906C = {
@@ -253,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCAD95232C6CCB3D006A6493 /* MovieListViewController.swift in Sources */,
 				FC48A50A2C36A9C400C53509 /* ListCollectionViewCell.swift in Sources */,
 				FC48A4DC2C32E60700C53509 /* UserViewController.swift in Sources */,
 				FC48A4DE2C32E61700C53509 /* UserViewModel.swift in Sources */,
