@@ -8,28 +8,35 @@
 import UIKit
 
 protocol NotesViewControllerDelegate: AnyObject {
-    func saveText(_ text: String)
+    func saveText(_ text: String, at indexPath: IndexPath?)
 }
 
 final class NotesViewController: UIViewController {
+    
+    var initialText: String?
     
     struct Constant {
         static let radius: Double = 6
         static let borderWidth: Double = 0.2
         static let title: String = "Notes"
     }
-
-    @IBOutlet private var textView: UITextView!
+    
+    @IBOutlet fileprivate var textView: UITextView!
     weak var delegate: NotesViewControllerDelegate?
     private let viewModel = NotesViewModel()
+    var indexPath: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = Constant.title
+        if let initialText = initialText {
+            textView.text = initialText
+        }
         viewModel.delegate = self
         viewModel.setupButtons()
         setupTextView()
+        
     }
     
     private func setupTextView() {
@@ -45,11 +52,11 @@ final class NotesViewController: UIViewController {
     }
     
     @objc func saveToggleButtonTapped(_ sender: UIBarButtonItem) {
-        viewModel.saveButtonTapped(text: textView.text)
+        viewModel.saveButtonTapped(text: textView.text, at: indexPath)
     }
 }
-
 extension NotesViewController: NotesViewModelDelegate {
+    
     func popViewController() {
         navigationController?.popViewController(animated: true)
     }
@@ -61,8 +68,8 @@ extension NotesViewController: NotesViewModelDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func saveText(_ text: String) {
-        delegate?.saveText(text)
+    func saveText(_ text: String, at indexPath: IndexPath?) {
+        delegate?.saveText(text, at: indexPath)
     }
     
     func setupCancelButton(action: Selector) {

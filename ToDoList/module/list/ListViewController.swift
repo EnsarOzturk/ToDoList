@@ -9,8 +9,9 @@ import UIKit
 
 protocol ListViewProtocol: AnyObject {
     func reloadData()
-    func navigateToNotesViewController()
+    func navigateToNotesViewController(with text: String?, at indexPath: IndexPath?)
     func addButtonAction()
+    func setupCollectionView(with layout: UICollectionViewFlowLayout)
 }
 
 final class ListViewController: UIViewController {
@@ -22,51 +23,38 @@ final class ListViewController: UIViewController {
     
     private var collectionView: UICollectionView!
     var viewModel: ListViewModelProtocol!
+    private let UserDefaults = UserDefaultsAssistant<ToDoItem>(key: "toDoItemsKey")
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = Constant.title
-        setupCollection()
-        viewModel = ListViewModel(view: self, delegate: self)
+        let layout = setupLayout()
+        setupCollectionView(with: layout)
+        viewModel = ListViewModel(view: self, delegate: self, userDefaultsKey: "toDoItemsKey")
         viewModel.viewDidLoad()
-        collectionView.reloadData()
-        }
+        reloadData()
+    }
+    
+    private func setupLayout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.sectionInset = UIEdgeInsets(top: Constant.zero, left: Constant.zero, bottom: Constant.zero, right: Constant.zero)
+        layout.minimumInteritemSpacing = Constant.zero
+        layout.minimumLineSpacing = Constant.zero
+        return layout
+    }
     
     @objc func addButtonAction() {
         viewModel.addButtonTapped()
     }
     
-    private func setupCollection() {
-        let layout = UICollectionViewFlowLayout()
-        
-        layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: Constant.zero, left: Constant.zero, bottom: Constant.zero, right: Constant.zero)
-        layout.minimumInteritemSpacing = Constant.zero
-        layout.minimumLineSpacing = Constant.zero
-        
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(ListCollectionViewCell.self, forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
-        collectionView.backgroundColor = .systemBackground
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(collectionView)
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-    }
-    
     private func deleteItem(at indexPath: IndexPath) {
-            viewModel.deleteItem(at: indexPath)
-            collectionView.performBatchUpdates({
-                collectionView.deleteItems(at: [indexPath])
-            }, completion: { _ in
-                self.viewModel.saveChanges()
+        viewModel.deleteItem(at: indexPath)
+        collectionView.performBatchUpdates({
+            collectionView.deleteItems(at: [indexPath])
+        }, completion: { _ in
+            self.viewModel.saveChanges()
         })
     }
 }
@@ -77,15 +65,12 @@ extension ListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath) as? ListCollectionViewCell else {
-           
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCell.identifier, for: indexPath) as? ListCell else {
             return UICollectionViewCell()
         }
         
-        let text = viewModel.cellForRowAt(at: indexPath)
-        let isChecked: Bool = UserDefaultsClass.shared.get(forKey: .textSave)
-        
-        cell.configure(with: text, isChecked: isChecked, indexPath: indexPath)
+        let item = viewModel.cellForRowAt(at: indexPath)
+        cell.configure(with: item.text, isChecked: item.isChecked, indexPath: indexPath)
         return cell
     }
 }
@@ -99,44 +84,39 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
 
 extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        func collectionView(_ collectionView: UICollectionView, trailingSwipeActionsConfigurationForItemAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
-                        self?.deleteItem(at: indexPath)
-                        completionHandler(true)
-                    }
-            let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-            configuration.performsFirstActionWithFullSwipe = false
-            return UISwipeActionsConfiguration(actions: [deleteAction])
-        }
+        
+        let item = viewModel.cellForRowAt(at: indexPath)
+        viewModel.itemSelected(at: indexPath, with: item.text)
     }
 }
 
 extension ListViewController: NotesViewControllerDelegate {
-  
-    func saveText(_ text: String) {
-        viewModel.saveText(text)
+    func saveText(_ text: String, at indexPath: IndexPath?) {
+        viewModel.saveText(text, at: indexPath)
     }
 }
 
 extension ListViewController: ListViewProtocol {
-    func navigateToNotesViewController() {
-        if let notesVC = self.storyboard?.instantiateViewController(ofType: NotesViewController.self) {
-            notesVC.delegate = self
-            navigationController?.pushViewController(notesVC, animated: true)
+    func navigateToNotesViewController(with text: String?, at indexPath: IndexPath?) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let notesVC = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as? NotesViewController {
+                notesVC.delegate = self
+                notesVC.indexPath = indexPath
+                notesVC.initialText = text
+                navigationController?.pushViewController(notesVC, animated: true)
+            } else {
         }
     }
-    
+   
     func reloadData() {
         collectionView.reloadData()
     }
-}
-
-extension ListViewController: ListViewModelDelegate {
+    
     func setupCollectionView(with layout: UICollectionViewFlowLayout) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(ListCollectionViewCell.self, forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
+        collectionView.register(ListCell.self, forCellWithReuseIdentifier: ListCell.identifier)
         collectionView.backgroundColor = .systemBackground
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
@@ -148,7 +128,9 @@ extension ListViewController: ListViewModelDelegate {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-    
+}
+
+extension ListViewController: ListViewModelDelegate {
     func setupAddButton(action: Selector) {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: action)
         addButton.tintColor = .black

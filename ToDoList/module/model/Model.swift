@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ToDoItem {
-    let text: String
+struct ToDoItem: Codable, Equatable  {
+    var text: String
     var isChecked: Bool
 }

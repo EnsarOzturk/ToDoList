@@ -31,9 +31,31 @@
                     <view key="view" contentMode="scaleToFill" id="rc8-oz-saN">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tM9-Vs-9Wu">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Jpv-Eg-0I0">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="UUL-Pg-EPb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tM9-Vs-9Wu" firstAttribute="top" secondItem="UUL-Pg-EPb" secondAttribute="top" id="D9Q-13-Mh4"/>
+                            <constraint firstItem="UUL-Pg-EPb" firstAttribute="bottom" secondItem="tM9-Vs-9Wu" secondAttribute="bottom" id="SRf-vE-xrj"/>
+                            <constraint firstItem="UUL-Pg-EPb" firstAttribute="trailing" secondItem="tM9-Vs-9Wu" secondAttribute="trailing" id="mFA-0K-NTS"/>
+                            <constraint firstItem="tM9-Vs-9Wu" firstAttribute="leading" secondItem="UUL-Pg-EPb" secondAttribute="leading" id="q9s-HV-bJm"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="tM9-Vs-9Wu" id="fXF-Xq-AGo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5qU-f3-kvc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

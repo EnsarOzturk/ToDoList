@@ -7,42 +7,42 @@
 
 import Foundation
 
-enum UserDefaultsKey: String {
-    case textSave
-    case itemState
+protocol UserDefaultsAssistantProtocol {
+    associatedtype T: Codable & Equatable
+    func saveData(_ items: [T])
+    func loadData() -> [T]
+    func removeData(_ item: T)
 }
 
-final class UserDefaultsClass {
-    
-    static let shared = UserDefaultsClass()
-    private let defaults = UserDefaults.standard
-    private init() {}
-    
-    func set<T: Codable>(_ value: T, forKey key: UserDefaultsKey) {
-        
+final class UserDefaultsAssistant<T: Codable & Equatable>: UserDefaultsAssistantProtocol {
+
+    private let userDefaults = UserDefaults.standard
+    private let userDefaultsKey: String
+
+    init(key: String) {
+        self.userDefaultsKey = key
+    }
+
+    func saveData(_ items: [T]) {
         let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(value) {
-            defaults.set(encoded, forKey: key.rawValue)
+        if let encoded = try? encoder.encode(items) {
+            userDefaults.set(encoded, forKey: userDefaultsKey)
         }
     }
-        
-    func get<T: Codable>(forKey key: UserDefaultsKey) -> T? {
-        if let data = defaults.data(forKey: key.rawValue) {
+
+    func loadData() -> [T] {
+        if let data = userDefaults.data(forKey: userDefaultsKey) {
             let decoder = JSONDecoder()
-            return try? decoder.decode(T.self, from: data)
+            if let items = try? decoder.decode([T].self, from: data) {
+                return items
+            }
         }
-        return nil
+        return []
     }
-    
-    func set(_ value: Bool, forKey key: UserDefaultsKey) {
-        defaults.set(value, forKey: key.rawValue)
-    }
-        
-    func get(forKey key: UserDefaultsKey) -> Bool {
-        return defaults.bool(forKey: key.rawValue)
-    }
-        
-    func remove(forKey key: UserDefaultsKey) {
-        defaults.removeObject(forKey: key.rawValue)
+
+    func removeData(_ item: T) {
+        var items = loadData()
+        items.removeAll { $0 == item }
+        saveData(items)
     }
 }

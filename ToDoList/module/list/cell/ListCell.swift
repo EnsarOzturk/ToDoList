@@ -1,13 +1,13 @@
 //
-//  ListCollectionViewCell.swift
+//  ListCell.swift
 //  ToDoList
 //
-//  Created by Ensar on 4.07.2024.
+//  Created by Ensar on 19.08.2024.
 //
 
 import UIKit
 
-final class ListCollectionViewCell: UICollectionViewCell {
+final class ListCell: UICollectionViewCell {
     
     var indexPath: IndexPath?
     
@@ -16,7 +16,7 @@ final class ListCollectionViewCell: UICollectionViewCell {
         static let buttonSystemFont: Double = 20
         static let zero: Double = 0
         static let buttonBorderWidth: Double = 0.5
-        static let buttonRadius: Double = 1.5
+        static let buttonRadius: Double = 2.5
         static let selected: String = "✓"
         static let normal: String = ""
     }
@@ -26,7 +26,7 @@ final class ListCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.numberOfLines = Int(Constant.zero)
-        label.font = UIFont.systemFont(ofSize: Constant.labelSystemFont)        
+        label.font = UIFont.systemFont(ofSize: Constant.labelSystemFont)
         return label
     }()
     
@@ -34,7 +34,7 @@ final class ListCollectionViewCell: UICollectionViewCell {
         let button = UIButton(type: .custom)
         button.setTitle(Constant.selected, for: .selected)
         button.setTitle(Constant.normal, for: .normal)
-        button.setTitleColor(.green, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: Constant.buttonSystemFont)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.borderWidth = Constant.buttonBorderWidth
@@ -82,11 +82,17 @@ final class ListCollectionViewCell: UICollectionViewCell {
         
     @objc private func buttonTapped() {
         isChecked.toggle()
+        saveToUserDefaults()
     }
     
     private func saveToUserDefaults() {
         guard let indexPath = indexPath else { return }
-        UserDefaultsClass.shared.set(isChecked, forKey: .textSave)
+        var items = UserDefaultsAssistant<ToDoItem>(key: "toDoItemsKey").loadData()
+        
+        if items.indices.contains(indexPath.row) {
+            items[indexPath.row].isChecked = isChecked
+        }
+        UserDefaultsAssistant<ToDoItem>(key: "toDoItemsKey").saveData(items)
     }
     
     func configure(with text: String, isChecked: Bool, indexPath: IndexPath) {
@@ -97,14 +103,13 @@ final class ListCollectionViewCell: UICollectionViewCell {
   
     override func awakeFromNib() {
         super.awakeFromNib()
-             
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
         label.text = nil
-        checkButton.isSelected = false
         indexPath = nil
     }
 }
+

@@ -10,7 +10,7 @@ import Foundation
 protocol NotesViewModelDelegate: AnyObject {
     func popViewController()
     func showAlert()
-    func saveText(_ text: String)
+    func saveText(_ text: String, at indexPath: IndexPath?)
     func setupCancelButton(action: Selector)
     func setupSaveButton(action: Selector)
 }
@@ -28,9 +28,9 @@ final class NotesViewModel {
         delegate?.popViewController()
     }
     
-    func saveButtonTapped(text: String) {
+    func saveButtonTapped(text: String, at indexPath: IndexPath?) {
         if textValidate(text) {
-            delegate?.saveText(text)
+            delegate?.saveText(text, at: indexPath)
             delegate?.popViewController()
         } else {
             delegate?.showAlert()

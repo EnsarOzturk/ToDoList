@@ -14,100 +14,103 @@ protocol ListViewModelDelegate: AnyObject {
 
 protocol ListViewModelProtocol {
     var numberOfRows: Int { get }
-    func cellForRowAt(at indexPath: IndexPath) -> String
-    func deleteIndex(at indexPath: IndexPath)
-    func saveText(_ text: String)
+    func cellForRowAt(at indexPath: IndexPath) -> ToDoItem
+    func deleteItem(at indexPath: IndexPath)
+    func saveText(_ text: String, at indexPath: IndexPath?)
     func viewDidLoad()
     func addButtonTapped()
     func sizeForItemAt(indexPath: IndexPath, collectionViewWidth: CGFloat) -> CGSize
-    func deleteItem(at indexPath: IndexPath)
     func saveChanges()
+    func itemSelected(at indexPath: IndexPath, with text: String)
 }
 
 final class ListViewModel: ListViewModelProtocol {
-    
+
     struct Constant {
         static let systemFontSize: Double = 15
-        static let maxHeight: Double = 70
+        static let maxHeight: Double = 40
         static let zero: Double = 0
     }
     
-    func deleteItem(at indexPath: IndexPath) {
-        list.remove(at: indexPath.row)
-        UserDefaultsClass.shared.remove(forKey: .textSave)
-    }
-    
-    func saveChanges() {
-        
-        for (index, item) in items.enumerated() {
-            let indexPath = IndexPath(row: index, section: 0)
-            UserDefaultsClass.shared.set(true, forKey: .textSave)
-        }
-    }
-
-    private var list: [String] = []
-    private var items: [String] = []
+    private var items: [ToDoItem] = []
     weak var view: ListViewProtocol?
     weak var delegate: ListViewModelDelegate?
-    private let userDefaultsClass = UserDefaultsClass.shared
+    private let userDefaultsAssistant: UserDefaultsAssistant<ToDoItem>
     
-    init(view: ListViewProtocol, delegate: ListViewModelDelegate) {
+    init(view: ListViewProtocol, delegate: ListViewModelDelegate, userDefaultsKey: String) {
         self.view = view
         self.delegate = delegate
+        self.userDefaultsAssistant = UserDefaultsAssistant(key: userDefaultsKey)
     }
     
     var numberOfRows: Int {
-        return list.count
+        return items.count
     }
     
-    func cellForRowAt(at indexPath: IndexPath) -> String {
-        list[indexPath.row]
+    func cellForRowAt(at indexPath: IndexPath) -> ToDoItem {
+        return items[indexPath.row]
     }
     
-    func deleteIndex(at indexPath: IndexPath) {
-        list.remove(at: indexPath.item)
+    func deleteItem(at indexPath: IndexPath) {
+        let item = items.remove(at: indexPath.row)
+        userDefaultsAssistant.removeData(item)
+    }
+    
+    func saveText(_ text: String, at indexPath: IndexPath?) {
+        if let indexPath = indexPath {
+            items[indexPath.row].text = text
+            items[indexPath.row].isChecked = items[indexPath.row].isChecked
+        } else {
+            let newItem = ToDoItem(text: text, isChecked: false)
+            items.append(newItem)
+        }
         saveToUserDefaults()
+        view?.reloadData()
     }
     
     func viewDidLoad() {
-        getTextArray()
+        loadItems()
         view?.reloadData()
         setupAddButton()
+        
     }
     
-    private func getTextArray() {
-        if let textSave: [String]  = userDefaultsClass.get(forKey: .textSave) {
-            list = textSave
-        }
-    }
-    
-    func saveText(_ text: String) {
-        list.append(text)
+    func saveChanges() {
         saveToUserDefaults()
+    }
+    
+    private func loadItems() {
+        let items = UserDefaultsAssistant<ToDoItem>(key: "toDoItemsKey").loadData()
+        self.items = items
         view?.reloadData()
-       }
+    }
+    
+    private func saveToUserDefaults() {
+        userDefaultsAssistant.saveData(items)
+    }
     
     func sizeForItemAt(indexPath: IndexPath, collectionViewWidth: CGFloat) -> CGSize {
         let item = cellForRowAt(at: indexPath)
         let font = UIFont.systemFont(ofSize: Constant.systemFontSize)
-        let height = item.height(constraintedWidth: collectionViewWidth, font: font)
+        let height = item.text.height(constraintedWidth: collectionViewWidth, font: font)
         return CGSize(width: collectionViewWidth, height: max(height, Constant.maxHeight))
     }
     
-    
     func addButtonTapped() {
-        view?.navigateToNotesViewController()
+        view?.navigateToNotesViewController(with: nil, at: nil)
     }
+    
+    func itemSelected(at indexPath: IndexPath, with text: String) {
+            view?.navigateToNotesViewController(with: text, at: indexPath)
+        }
     
     func setupAddButton() {
         delegate?.setupAddButton(action: #selector(addButtonAction))
     }
     
     @objc private func addButtonAction() {
-            view?.addButtonAction()
-        }
-    
-    private func saveToUserDefaults() {
-        userDefaultsClass.set(list, forKey: .textSave)
+        view?.addButtonAction()
     }
 }
+
+
