@@ -24,7 +24,7 @@ protocol ListViewModelProtocol {
     func itemSelected(at indexPath: IndexPath, with text: String)
 }
 
-final class ListViewModel: ListViewModelProtocol {
+final class ListViewModel {
     
     struct Constant {
         static let systemFontSize: Double = 15
@@ -42,7 +42,23 @@ final class ListViewModel: ListViewModelProtocol {
         self.delegate = delegate
         self.userDefaultsAssistant = UserDefaultsAssistant(key: userDefaultsKey)
     }
+
+    private func loadItems() {
+        let items = UserDefaultsAssistant<ToDoItem>(key: "toDoItemsKey").loadData()
+        self.items = items
+        view?.reloadData()
+    }
     
+    private func saveToUserDefaults() {
+        userDefaultsAssistant.saveData(items)
+    }
+    @objc private func addButtonAction() {
+        view?.addButtonAction()
+    }
+}
+
+extension ListViewModel: ListViewModelProtocol {
+   
     var numberOfRows: Int {
         return items.count
     }
@@ -50,7 +66,7 @@ final class ListViewModel: ListViewModelProtocol {
     func cellForRowAt(at indexPath: IndexPath) -> ToDoItem {
         return items[indexPath.row]
     }
-    
+
     func deleteItem(at indexPath: IndexPath) {
         let item = items.remove(at: indexPath.row)
         userDefaultsAssistant.removeData(item)
@@ -71,21 +87,10 @@ final class ListViewModel: ListViewModelProtocol {
         loadItems()
         view?.reloadData()
         setupAddButton()
-        
     }
     
     func saveChanges() {
         saveToUserDefaults()
-    }
-    
-    private func loadItems() {
-        let items = UserDefaultsAssistant<ToDoItem>(key: "toDoItemsKey").loadData()
-        self.items = items
-        view?.reloadData()
-    }
-    
-    private func saveToUserDefaults() {
-        userDefaultsAssistant.saveData(items)
     }
     
     func sizeForItemAt(indexPath: IndexPath, collectionViewWidth: CGFloat) -> CGSize {
@@ -100,15 +105,11 @@ final class ListViewModel: ListViewModelProtocol {
     }
     
     func itemSelected(at indexPath: IndexPath, with text: String) {
-            view?.navigateToNotesViewController(with: text, at: indexPath)
-        }
+        view?.navigateToNotesViewController(with: text, at: indexPath)
+    }
     
     func setupAddButton() {
         delegate?.setupAddButton(action: #selector(addButtonAction))
-    }
-    
-    @objc private func addButtonAction() {
-        view?.addButtonAction()
     }
 }
 
