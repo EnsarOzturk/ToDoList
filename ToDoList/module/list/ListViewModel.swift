@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 protocol ListViewModelDelegate: AnyObject {
     func setupAddButton(action: Selector)
@@ -19,7 +18,6 @@ protocol ListViewModelProtocol {
     func saveText(_ text: String, at indexPath: IndexPath?)
     func viewDidLoad()
     func addButtonTapped()
-    func sizeForItemAt(indexPath: IndexPath, collectionViewWidth: CGFloat) -> CGSize
     func saveChanges()
     func itemSelected(at indexPath: IndexPath, with text: String)
 }
@@ -91,13 +89,6 @@ extension ListViewModel: ListViewModelProtocol {
     
     func saveChanges() {
         saveToUserDefaults()
-    }
-    
-    func sizeForItemAt(indexPath: IndexPath, collectionViewWidth: CGFloat) -> CGSize {
-        let item = cellForRowAt(at: indexPath)
-        let font = UIFont.systemFont(ofSize: Constant.systemFontSize)
-        let height = item.text.height(constraintedWidth: collectionViewWidth, font: font)
-        return CGSize(width: collectionViewWidth, height: max(height, Constant.maxHeight))
     }
     
     func addButtonTapped() {
