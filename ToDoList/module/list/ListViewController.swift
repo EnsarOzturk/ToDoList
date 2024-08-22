@@ -23,7 +23,7 @@ final class ListViewController: UIViewController {
     
     private var collectionView: UICollectionView!
     var viewModel: ListViewModelProtocol!
-    private let UserDefaults = UserDefaultsAssistant<ToDoItem>(key: "toDoItemsKey")
+    private let UserDefaults = UserDefaultsAssistant<ToDoItem>()
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ final class ListViewController: UIViewController {
         title = Constant.title
         let layout = setupLayout()
         setupCollectionView(with: layout)
-        viewModel = ListViewModel(view: self, delegate: self, userDefaultsKey: "toDoItemsKey")
+        viewModel = ListViewModel(view: self, delegate: self)
         viewModel.viewDidLoad()
         reloadData()
     }
@@ -77,8 +77,7 @@ extension ListViewController: UICollectionViewDataSource {
 
 extension ListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        return CGSize(width: collectionView.bounds.width, height: 30)
+        CGSize(width: collectionView.bounds.width, height: 30)
     }
 }
 

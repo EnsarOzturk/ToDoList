@@ -36,21 +36,22 @@ final class ListViewModel {
     weak var delegate: ListViewModelDelegate?
     private let userDefaultsAssistant: UserDefaultsAssistant<ToDoItem>
     
-    init(view: ListViewProtocol, delegate: ListViewModelDelegate, userDefaultsKey: String) {
+    init(view: ListViewProtocol, delegate: ListViewModelDelegate) {
         self.view = view
         self.delegate = delegate
-        self.userDefaultsAssistant = UserDefaultsAssistant(key: userDefaultsKey)
+        self.userDefaultsAssistant = UserDefaultsAssistant<ToDoItem>()
     }
 
     private func loadItems() {
-        let items = UserDefaultsAssistant<ToDoItem>(key: "toDoItemsKey").loadData()
+        let items = userDefaultsAssistant.loadData(forKey: "toDoItemsKey")
         self.items = items
         view?.reloadData()
     }
     
     private func saveToUserDefaults() {
-        userDefaultsAssistant.saveData(items)
+        userDefaultsAssistant.saveData(items, forKey: "toDoItemsKey")
     }
+    
     @objc private func addButtonAction() {
         view?.addButtonAction()
     }
@@ -59,16 +60,16 @@ final class ListViewModel {
 extension ListViewModel: ListViewModelProtocol {
    
     var numberOfRows: Int {
-        return items.count
+        items.count
     }
     
     func cellForRowAt(at indexPath: IndexPath) -> ToDoItem {
-        return items[indexPath.row]
+        items[indexPath.row]
     }
 
     func deleteItem(at indexPath: IndexPath) {
         let item = items.remove(at: indexPath.row)
-        userDefaultsAssistant.removeData(item)
+        userDefaultsAssistant.removeData(item, forKey: "toDoItemsKey")
     }
     
     func updateText(_ text: String, at indexPath: IndexPath) {

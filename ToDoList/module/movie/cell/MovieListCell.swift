@@ -13,6 +13,8 @@ class MovieListCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        imageView.backgroundColor = .blue
+        label.numberOfLines = 0
     }
     
     func configure(with movie: Movie, viewModel: MovieListViewModelProtocol) {

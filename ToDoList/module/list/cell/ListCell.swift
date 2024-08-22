@@ -43,6 +43,8 @@ final class ListCell: UICollectionViewCell {
         return button
     }()
     
+    private let userDefaultsAssistant = UserDefaultsAssistant<ToDoItem>()
+    
     var isChecked: Bool = false {
         didSet {
             checkButton.isSelected = isChecked
@@ -87,14 +89,14 @@ final class ListCell: UICollectionViewCell {
     
     private func saveToUserDefaults() {
         guard let indexPath = indexPath else { return }
-        var items = UserDefaultsAssistant<ToDoItem>(key: "toDoItemsKey").loadData()
+        var items = userDefaultsAssistant.loadData(forKey: "toDoItemsKey")
         
         if items.indices.contains(indexPath.row) {
             items[indexPath.row].isChecked = isChecked
+            userDefaultsAssistant.saveData(items, forKey: "toDoItemsKey")
         }
-        UserDefaultsAssistant<ToDoItem>(key: "toDoItemsKey").saveData(items)
     }
-    
+       
     func configure(with text: String, isChecked: Bool, indexPath: IndexPath) {
         label.text = text
         self.isChecked = isChecked

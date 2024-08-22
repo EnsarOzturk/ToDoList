@@ -9,29 +9,24 @@ import Foundation
 
 protocol UserDefaultsAssistantProtocol {
     associatedtype T: Codable & Equatable
-    func saveData(_ items: [T])
-    func loadData() -> [T]
-    func removeData(_ item: T)
+    func saveData(_ items: [T], forKey key: String)
+    func loadData(forKey key: String) -> [T]
+    func removeData(_ item: T, forKey key: String)
 }
 
 final class UserDefaultsAssistant<T: Codable & Equatable>: UserDefaultsAssistantProtocol {
 
     private let userDefaults = UserDefaults.standard
-    private let userDefaultsKey: String
 
-    init(key: String) {
-        self.userDefaultsKey = key
-    }
-
-    func saveData(_ items: [T]) {
+    func saveData(_ items: [T], forKey key: String) {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(items) {
-            userDefaults.set(encoded, forKey: userDefaultsKey)
+            userDefaults.set(encoded, forKey: key)
         }
     }
 
-    func loadData() -> [T] {
-        if let data = userDefaults.data(forKey: userDefaultsKey) {
+    func loadData(forKey key: String) -> [T] {
+        if let data = userDefaults.data(forKey: key) {
             let decoder = JSONDecoder()
             if let items = try? decoder.decode([T].self, from: data) {
                 return items
@@ -40,9 +35,9 @@ final class UserDefaultsAssistant<T: Codable & Equatable>: UserDefaultsAssistant
         return []
     }
 
-    func removeData(_ item: T) {
-        var items = loadData()
+    func removeData(_ item: T, forKey key: String) {
+        var items = loadData(forKey: key)
         items.removeAll { $0 == item }
-        saveData(items)
+        saveData(items, forKey: key)
     }
 }

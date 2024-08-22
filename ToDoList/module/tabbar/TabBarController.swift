@@ -26,16 +26,16 @@ final class TabBarController: UITabBarController {
         
         var viewControllers: [UIViewController] = []
         
-        for tabbarItems in tabbarItems {
-            let viewController = storyBoard.instantiateViewController(ofType: tabbarItems.viewControllerType)
+        for tabbarItem in tabbarItems {
+            let viewController = storyBoard.instantiateViewController(ofType: tabbarItem.viewControllerType)
             
             if let listVC = viewController as? ListViewController {
-                let listViewModel = ListViewModel(view: listVC, delegate: listVC, userDefaultsKey: "yourUserDefaultsKey")
+                let listViewModel = ListViewModel(view: listVC, delegate: listVC)
                 listVC.viewModel = listViewModel
             }
            
             let navigationController = UINavigationController(rootViewController: viewController)
-                navigationController.tabBarItem = UITabBarItem(title: tabbarItems.title, image: UIImage(systemName: tabbarItems.imageName), tag: tabbarItems.tag)
+                navigationController.tabBarItem = UITabBarItem(title: tabbarItem.title, image: UIImage(systemName: tabbarItem.imageName), tag: tabbarItem.tag)
                 viewControllers.append(navigationController)
         }
             self.viewControllers = viewControllers

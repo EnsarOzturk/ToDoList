@@ -13,7 +13,7 @@ protocol MovieListViewProtocol: AnyObject {
 }
 
 class MovieListViewController: UIViewController {
-   
+    
     @IBOutlet var collectionView: UICollectionView!
     private var viewModel: MovieListViewModelProtocol!
     
@@ -22,7 +22,6 @@ class MovieListViewController: UIViewController {
         
         viewModel = MovieListViewModel(view: self)
         collectionView.dataSource = self
-        collectionView.delegate = self
         collectionView.register(UINib(nibName: "MovieListCell", bundle: nil), forCellWithReuseIdentifier: "MovieListCell")
         viewModel.fetchMovies()
     }
@@ -37,13 +36,8 @@ extension MovieListViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieListCell", for: indexPath) as! MovieListCell
         let movie = viewModel.movie(at: indexPath)
         cell.configure(with: movie, viewModel: viewModel)
-        
         return cell
     }
-}
-
-extension MovieListViewController: UICollectionViewDelegate {
-    
 }
 
 extension MovieListViewController: UICollectionViewDelegateFlowLayout {

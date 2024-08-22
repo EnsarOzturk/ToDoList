@@ -35,11 +35,11 @@ final class NotesViewController: UIViewController {
         if let initialText = initialText {
             textView.text = initialText
         }
+        
         viewModel.delegate = self
         viewModel.indexPath = indexPath
         viewModel.setupButtons()
         setupTextView()
-        
     }
     
     private func setupTextView() {
