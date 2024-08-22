@@ -49,7 +49,7 @@ final class ListViewController: UIViewController {
         viewModel.addButtonTapped()
     }
     
-    private func deleteItem(at indexPath: IndexPath) {
+    internal func deleteItem(at indexPath: IndexPath) {
         viewModel.deleteItem(at: indexPath)
         collectionView.performBatchUpdates({
             collectionView.deleteItems(at: [indexPath])
@@ -77,8 +77,9 @@ extension ListViewController: UICollectionViewDataSource {
 
 extension ListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-       
-        return viewModel.sizeForItemAt(indexPath: indexPath, collectionViewWidth: collectionView.bounds.width)
+       //collectionView kullanma
+        return CGSize(width: collectionView.bounds.width, height: 30)
+//        return viewModel.sizeForItemAt(indexPath: indexPath, collectionViewWidth: collectionView.bounds.width)
     }
 }
 

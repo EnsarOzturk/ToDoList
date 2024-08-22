@@ -34,4 +34,25 @@ class NetworkManager {
             throw NetworkError.requestFailed
         }
     }
+    
+//    class NetworkManager {
+//        static let shared = NetworkManager()
+//        
+//        private init() {}
+//        
+//        func request<T: Decodable>(url: URL, method: HTTPMethod, decodeType: T.Type) async throws -> T {
+//            var request = URLRequest(url: url)
+//            request.httpMethod = method.rawValue
+//            
+//            do {
+//                let (data, _) = try await URLSession.shared.data(for: request)
+//                let decode = try JSONDecoder().decode(T.self, from: data)
+//                return decode
+//            } catch {
+//                throw NetworkError.requestFailed
+//            }
+//        }
+//    }
 }
+
+

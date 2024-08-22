@@ -25,7 +25,7 @@ protocol ListViewModelProtocol {
 }
 
 final class ListViewModel: ListViewModelProtocol {
-
+    
     struct Constant {
         static let systemFontSize: Double = 15
         static let maxHeight: Double = 40
@@ -59,7 +59,6 @@ final class ListViewModel: ListViewModelProtocol {
     func saveText(_ text: String, at indexPath: IndexPath?) {
         if let indexPath = indexPath {
             items[indexPath.row].text = text
-            items[indexPath.row].isChecked = items[indexPath.row].isChecked
         } else {
             let newItem = ToDoItem(text: text, isChecked: false)
             items.append(newItem)

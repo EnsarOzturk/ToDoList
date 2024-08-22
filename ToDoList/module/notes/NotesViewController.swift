@@ -9,6 +9,8 @@ import UIKit
 
 protocol NotesViewControllerDelegate: AnyObject {
     func saveText(_ text: String, at indexPath: IndexPath?)
+    func reloadData()
+    func deleteItem(at indexPath: IndexPath)
 }
 
 final class NotesViewController: UIViewController {
@@ -34,6 +36,7 @@ final class NotesViewController: UIViewController {
             textView.text = initialText
         }
         viewModel.delegate = self
+        viewModel.indexPath = indexPath
         viewModel.setupButtons()
         setupTextView()
         
@@ -47,6 +50,10 @@ final class NotesViewController: UIViewController {
         textView.becomeFirstResponder()
     }
     
+    @objc func deleteToggleButtonTapped(_ sender: UIBarButtonItem) {
+        viewModel.deleteButtonTapped()
+    }
+    
     @objc func cancelToggleButtonTapped(_ sender: UIBarButtonItem) {
         viewModel.cancelButtonTapped()
     }
@@ -56,6 +63,11 @@ final class NotesViewController: UIViewController {
     }
 }
 extension NotesViewController: NotesViewModelDelegate {
+    func deleteItem(at indexPath: IndexPath) {
+        delegate?.deleteItem(at: indexPath)
+        delegate?.reloadData()
+        popViewController()
+    }
     
     func popViewController() {
         navigationController?.popViewController(animated: true)
@@ -83,6 +95,13 @@ extension NotesViewController: NotesViewModelDelegate {
         navigationItem.rightBarButtonItem = saveButton
         saveButton.tintColor = .black
     }
+    
+    func setupDeleteButton(action: Selector) {
+        let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: action)
+        deleteButton.tintColor = .black
+        navigationItem.rightBarButtonItems = [deleteButton, navigationItem.rightBarButtonItem].compactMap { $0 }
+    }
 }
+
 
 
