@@ -15,7 +15,8 @@ protocol ListViewModelProtocol {
     var numberOfRows: Int { get }
     func cellForRowAt(at indexPath: IndexPath) -> ToDoItem
     func deleteItem(at indexPath: IndexPath)
-    func saveText(_ text: String, at indexPath: IndexPath?)
+    func saveText(_ text: String)
+    func updateText(_ text: String, at indexPath: IndexPath)
     func viewDidLoad()
     func addButtonTapped()
     func saveChanges()
@@ -70,17 +71,19 @@ extension ListViewModel: ListViewModelProtocol {
         userDefaultsAssistant.removeData(item)
     }
     
-    func saveText(_ text: String, at indexPath: IndexPath?) {
-        if let indexPath = indexPath {
-            items[indexPath.row].text = text
-        } else {
-            let newItem = ToDoItem(text: text, isChecked: false)
-            items.append(newItem)
-        }
+    func updateText(_ text: String, at indexPath: IndexPath) {
+        items[indexPath.row].text = text
         saveToUserDefaults()
         view?.reloadData()
     }
     
+    func saveText(_ text: String) {
+        let newItem = ToDoItem(text: text, isChecked: false)
+        items.append(newItem)
+        saveToUserDefaults()
+        view?.reloadData()
+    }
+      
     func viewDidLoad() {
         loadItems()
         view?.reloadData()

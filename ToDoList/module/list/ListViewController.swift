@@ -77,9 +77,8 @@ extension ListViewController: UICollectionViewDataSource {
 
 extension ListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-       //collectionView kullanma
+
         return CGSize(width: collectionView.bounds.width, height: 30)
-//        return viewModel.sizeForItemAt(indexPath: indexPath, collectionViewWidth: collectionView.bounds.width)
     }
 }
 
@@ -93,7 +92,11 @@ extension ListViewController: UICollectionViewDelegate {
 
 extension ListViewController: NotesViewControllerDelegate {
     func saveText(_ text: String, at indexPath: IndexPath?) {
-        viewModel.saveText(text, at: indexPath)
+        if let indexPath = indexPath {
+            viewModel.updateText(text, at: indexPath)
+        } else {
+            viewModel.saveText(text)
+        }
     }
 }
 
