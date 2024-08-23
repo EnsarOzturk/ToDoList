@@ -20,8 +20,7 @@ final class TabBarController: UITabBarController {
         let tabbarItems: [(viewControllerType: UIViewController.Type, title: String, imageName: String, tag: Int)] = [
             (ListViewController.self, "list", "list.bullet.circle", 0),
             (NotesViewController.self, "notes", "plus.circle", 1),
-            (UserViewController.self, "user", "person.circle", 2),
-            (MovieListViewController.self, "movie", "popcorn.circle", 3)
+            (MovieListViewController.self, "movie", "popcorn.circle", 2)
         ]
         
         var viewControllers: [UIViewController] = []
