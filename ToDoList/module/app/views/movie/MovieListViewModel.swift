@@ -27,7 +27,6 @@ class MovieListViewModel: MovieListViewModelProtocol {
     private(set) var movies: [Movie] = []
     weak var view: MovieListViewProtocol?
     
-    
     init(view: MovieListViewProtocol) {
         self.view = view
     }
@@ -39,11 +38,13 @@ class MovieListViewModel: MovieListViewModelProtocol {
     func fetchMovies() {
         guard let url = API.moviesUrl() else { return }
         Task {
-            do {
-                let response: MovieResponse = try await NetworkManager.shared.fetch(url: url, decodeType: MovieResponse.self)
+            let result: Result<MovieResponse, NetworkError> = await NetworkManager.shared.fetch(url: url, decodeType: MovieResponse.self)
+            
+            switch result {
+            case .success(let response):
                 self.movies = response.results
                 self.view?.reloadData()
-            } catch {
+            case .failure(let error):
                 self.view?.displayError(error.localizedDescription)
             }
         }

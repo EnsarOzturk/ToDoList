@@ -189,6 +189,10 @@
 		FCAD95382C7C7681006A6493 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				FC48A4D22C32E2EF00C53509 /* list */,
+				FC48A4D52C32E54000C53509 /* notes */,
+				FCAD95242C6CCB49006A6493 /* movie */,
+				FCAD95392C7C7722006A6493 /* boards */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -206,15 +210,10 @@
 			isa = PBXGroup;
 			children = (
 				FCAD95382C7C7681006A6493 /* views */,
-				FCAD95392C7C7722006A6493 /* boards */,
-				FC48A4D22C32E2EF00C53509 /* list */,
-				FC48A4D52C32E54000C53509 /* notes */,
-				FCAD95242C6CCB49006A6493 /* movie */,
 				FC76459D2C412BBC002DDCC9 /* tabbar */,
 				FCD6F6AC2C302223001C906C /* SceneDelegate.swift */,
 				FCD6F6AA2C302223001C906C /* AppDelegate.swift */,
 				FCD6F6B32C302225001C906C /* Assets.xcassets */,
-				FCD6F6B82C302225001C906C /* Info.plist */,
 			);
 			path = app;
 			sourceTree = "<group>";
@@ -238,6 +237,7 @@
 		FCD6F6A92C302223001C906C /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				FCD6F6B82C302225001C906C /* Info.plist */,
 				FC48A50E2C37C9E500C53509 /* utils */,
 				FC48A4D12C32D1C700C53509 /* module */,
 			);
