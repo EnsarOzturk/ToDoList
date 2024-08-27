@@ -38,8 +38,7 @@ class MovieListViewModel: MovieListViewModelProtocol {
     func fetchMovies() {
         guard let url = API.moviesUrl() else { return }
         Task {
-            let result: Result<MovieResponse, NetworkError> = await NetworkManager.shared.fetch(url: url, decodeType: MovieResponse.self)
-            
+            let result: Result<MovieResponse, NetworkError> = await NetworkManager.shared.request(url: url, decodeType: MovieResponse.self)
             switch result {
             case .success(let response):
                 self.movies = response.results
@@ -52,12 +51,13 @@ class MovieListViewModel: MovieListViewModelProtocol {
     
     func fetchImage(for movie: Movie) async -> UIImage? {
         guard let posterPath = movie.posterPath, let posterUrl = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)") else { return nil }
-        do {
-            let (data, _) = try await URLSession.shared.data(from: posterUrl)
-            return UIImage(data: data)
-        } catch {
-            print(error.localizedDescription)
-            return nil
+        let result: Result<Data, NetworkError> = await NetworkManager.shared.request(url: posterUrl, decodeType: Data.self)
+        switch result {
+            case .success(let data):
+                return UIImage(data: data)
+            case .failure(let error):
+                print(error.localizedDescription)
+                return nil
         }
     }
     
@@ -66,8 +66,8 @@ class MovieListViewModel: MovieListViewModelProtocol {
     }
     
     func sizeForItem(at indexPath: IndexPath, collectionViewWidth: CGFloat) -> CGSize {
-        let spacing: CGFloat = 10
+        let spacing: CGFloat = 20
         let width = (collectionViewWidth - spacing * 3) / 2
-        return CGSize(width: width, height: width * 1.5)
+        return CGSize(width: width, height: width * 4)
     }
 }

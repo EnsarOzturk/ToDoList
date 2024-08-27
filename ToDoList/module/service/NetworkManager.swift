@@ -25,7 +25,15 @@ class NetworkManager {
     
     private init() {}
     
-    func fetch<T: Decodable>(url: URL, decodeType: T.Type) async -> Result<T, NetworkError> {
+    func request<T: Decodable>(url: URL, method: HTTPMethod = .GET, body: Data? = nil, decodeType: T.Type) async -> Result<T, NetworkError> {
+        var request = URLRequest(url: url)
+        request.httpMethod = method.rawValue
+
+        if let body = body {
+            request.httpBody = body
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
+        
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             let decoded = try JSONDecoder().decode(T.self, from: data)
@@ -36,7 +44,7 @@ class NetworkManager {
             } else if (error as? DecodingError) != nil {
                 return .failure(.decodingError)
             } else {
-                return .failure(.requestFailed)
+                return .failure(.badURL)
             }
         }
     }
