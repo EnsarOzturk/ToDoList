@@ -35,7 +35,7 @@ class NetworkManager {
         }
         
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+            let (data, _) = try await URLSession.shared.data(for: request)
             let decoded = try JSONDecoder().decode(T.self, from: data)
             return .success(decoded)
         } catch {
