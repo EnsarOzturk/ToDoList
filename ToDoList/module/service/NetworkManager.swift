@@ -25,29 +25,30 @@ class NetworkManager {
     
     private init() {}
     
-    func request<T: Decodable>(url: URL, method: HTTPMethod = .GET, body: Data? = nil, decodeType: T.Type) async -> Result<T, NetworkError> {
-        var request = URLRequest(url: url)
-        request.httpMethod = method.rawValue
-
-        if let body = body {
-            request.httpBody = body
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    func request<T: Decodable>(type: T.Type, endpoint: Endpoint, decodeType: T.Type) async -> Result<T, NetworkError> {
+        guard let url = endpoint.url else {
+            return .failure(.badURL)
         }
         
+        var request = URLRequest(url: url)
+        request.httpMethod = endpoint.method.rawValue
+        request.allHTTPHeaderFields = endpoint.header
+        
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
-            let decoded = try JSONDecoder().decode(T.self, from: data)
-            return .success(decoded)
-        } catch {
-            if (error as? URLError) != nil {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
                 return .failure(.requestFailed)
-            } else if (error as? DecodingError) != nil {
-                return .failure(.decodingError)
-            } else {
-                return .failure(.badURL)
+            }
+            
+            let decodedData = try JSONDecoder().decode(T.self, from: data)
+            return .success(decodedData)
+        } catch {
+                if (error as? DecodingError) != nil {
+                    return .failure(.decodingError)
+                } else {
+                    return .failure(.requestFailed)
             }
         }
     }
 }
-
-

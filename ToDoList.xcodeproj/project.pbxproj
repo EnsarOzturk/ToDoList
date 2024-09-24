@@ -24,6 +24,8 @@
 		FCAD95332C73575A006A6493 /* MovieListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAD95312C73575A006A6493 /* MovieListCell.xib */; };
 		FCAD95362C735AC0006A6493 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD95342C735AC0006A6493 /* ListCell.swift */; };
 		FCAD95372C735AC0006A6493 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAD95352C735AC0006A6493 /* ListCell.xib */; };
+		FCAD953D2CA2C0C9006A6493 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD953C2CA2C0C9006A6493 /* Endpoint.swift */; };
+		FCAD953F2CA2C147006A6493 /* MovieEndpointItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD953E2CA2C147006A6493 /* MovieEndpointItem.swift */; };
 		FCD6F6AB2C302223001C906C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD6F6AA2C302223001C906C /* AppDelegate.swift */; };
 		FCD6F6AD2C302223001C906C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD6F6AC2C302223001C906C /* SceneDelegate.swift */; };
 		FCD6F6B22C302223001C906C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCD6F6B02C302223001C906C /* Main.storyboard */; };
@@ -52,6 +54,8 @@
 		FCAD95312C73575A006A6493 /* MovieListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieListCell.xib; sourceTree = "<group>"; };
 		FCAD95342C735AC0006A6493 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		FCAD95352C735AC0006A6493 /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
+		FCAD953C2CA2C0C9006A6493 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		FCAD953E2CA2C147006A6493 /* MovieEndpointItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEndpointItem.swift; sourceTree = "<group>"; };
 		FCD6F6A72C302223001C906C /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD6F6AA2C302223001C906C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCD6F6AC2C302223001C906C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 		FC48A4D12C32D1C700C53509 /* module */ = {
 			isa = PBXGroup;
 			children = (
+				FCAD953B2CA2C08B006A6493 /* EndpointItems */,
 				FCAD952C2C735674006A6493 /* api */,
 				FCAD95292C73563C006A6493 /* service */,
 				FC76459E2C4FDFF8002DDCC9 /* model */,
@@ -218,6 +223,15 @@
 			path = app;
 			sourceTree = "<group>";
 		};
+		FCAD953B2CA2C08B006A6493 /* EndpointItems */ = {
+			isa = PBXGroup;
+			children = (
+				FCAD953C2CA2C0C9006A6493 /* Endpoint.swift */,
+				FCAD953E2CA2C147006A6493 /* MovieEndpointItem.swift */,
+			);
+			path = EndpointItems;
+			sourceTree = "<group>";
+		};
 		FCD6F69E2C302223001C906C = {
 			isa = PBXGroup;
 			children = (
@@ -324,8 +338,10 @@
 				FC48A5192C3DA96900C53509 /* String+Extension.swift in Sources */,
 				FC48A5132C37CBAA00C53509 /* Alert+Extension.swift in Sources */,
 				FCE02E432C40181900C42941 /* Storyboard+Extension.swift in Sources */,
+				FCAD953D2CA2C0C9006A6493 /* Endpoint.swift in Sources */,
 				FC7645A02C4FE01C002DDCC9 /* Model.swift in Sources */,
 				FC48A50D2C36DD9A00C53509 /* TabBarController.swift in Sources */,
+				FCAD953F2CA2C147006A6493 /* MovieEndpointItem.swift in Sources */,
 				FCD6F6AB2C302223001C906C /* AppDelegate.swift in Sources */,
 				FCAD952B2C735651006A6493 /* NetworkManager.swift in Sources */,
 				FCAD952E2C73567C006A6493 /* Api.swift in Sources */,

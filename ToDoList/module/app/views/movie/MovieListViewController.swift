@@ -35,8 +35,18 @@ extension MovieListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieListCell", for: indexPath) as! MovieListCell
         let movie = viewModel.movie(at: indexPath)
-        cell.configure(with: movie, viewModel: viewModel)
+        cell.configure(with: movie)
+        
+        Task {
+            if let imageData = await viewModel.fetchImageData(for: movie), let image = UIImage(data: imageData) {
+                cell.updateImage(image)
+            }
+        }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        viewModel.willDisplay(index: indexPath.row)
     }
 }
 
@@ -54,9 +64,11 @@ extension MovieListViewController: MovieListViewProtocol {
     }
     
     func displayError(_ error: String) {
-        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        }
     }
 }
 

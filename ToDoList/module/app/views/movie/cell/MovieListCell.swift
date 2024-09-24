@@ -17,14 +17,12 @@ class MovieListCell: UICollectionViewCell {
         label.numberOfLines = 0
     }
     
-    func configure(with movie: Movie, viewModel: MovieListViewModelProtocol) {
+    func configure(with movie: Movie) {
         label.text = movie.title
-        if let posterUrl = URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath ?? "")") {
-            Task {
-                if let image = await viewModel.fetchImage(for: movie) {
-                    self.imageView.image = image
-                }
-            }
-        }
+        imageView.image = nil
+    }
+        
+    func updateImage(_ image: UIImage?) {
+        imageView.image = nil
     }
 }

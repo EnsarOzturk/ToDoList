@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 protocol MovieListViewModelProtocol: AnyObject {
     var movies: [Movie] { get }
@@ -14,7 +13,8 @@ protocol MovieListViewModelProtocol: AnyObject {
     func fetchMovies()
     func movie(at indexPath: IndexPath) -> Movie
     func sizeForItem(at indexPath: IndexPath, collectionViewWidth: CGFloat) -> CGSize
-    func fetchImage(for movie: Movie) async -> UIImage?
+    func fetchImageData(for movie: Movie) async -> Data?
+    func willDisplay(index: Int)
 }
 
 protocol MovieListProtocol: AnyObject {
@@ -26,6 +26,7 @@ class MovieListViewModel: MovieListViewModelProtocol {
     
     private(set) var movies: [Movie] = []
     weak var view: MovieListViewProtocol?
+    var page = 1
     
     init(view: MovieListViewProtocol) {
         self.view = view
@@ -36,12 +37,17 @@ class MovieListViewModel: MovieListViewModelProtocol {
     }
     
     func fetchMovies() {
-        guard let url = API.moviesUrl() else { return }
+        
         Task {
-            let result: Result<MovieResponse, NetworkError> = await NetworkManager.shared.request(url: url, decodeType: MovieResponse.self)
+            let result: Result<MovieResponse, NetworkError> = await NetworkManager.shared.request(type: MovieResponse.self, endpoint: HomeEndpointItem(page: String(page)), decodeType: MovieResponse.self)
             switch result {
             case .success(let response):
-                self.movies = response.results
+                if page == 1 {
+                    self.movies = response.results
+                } else {
+                    self.movies.append(contentsOf: response.results)
+                }
+                
                 self.view?.reloadData()
             case .failure(let error):
                 self.view?.displayError(error.localizedDescription)
@@ -49,14 +55,16 @@ class MovieListViewModel: MovieListViewModelProtocol {
         }
     }
     
-    func fetchImage(for movie: Movie) async -> UIImage? {
+    func fetchImageData(for movie: Movie) async -> Data? {
         guard let posterPath = movie.posterPath, let posterUrl = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)") else { return nil }
-        let result: Result<Data, NetworkError> = await NetworkManager.shared.request(url: posterUrl, decodeType: Data.self)
-        switch result {
-            case .success(let data):
-                return UIImage(data: data)
-            case .failure(let error):
-                print(error.localizedDescription)
+        var imageRequest = URLRequest(url: posterUrl)
+        imageRequest.httpMethod = HTTPMethod.GET.rawValue
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(for: imageRequest)
+            return data
+        } catch {
+            print(error.localizedDescription)
                 return nil
         }
     }
@@ -69,5 +77,12 @@ class MovieListViewModel: MovieListViewModelProtocol {
         let spacing: CGFloat = 20
         let width = (collectionViewWidth - spacing * 3) / 2
         return CGSize(width: width, height: width * 4)
+    }
+    
+    func willDisplay(index: Int) {
+        if index < movies.count - 1 {
+            page += 1
+            fetchMovies()
+        }
     }
 }
