@@ -50,7 +50,7 @@ final class ListViewController: UIViewController {
     }
     
     internal func deleteItem(at indexPath: IndexPath) {
-        viewModel.deleteItem(at: indexPath)
+        viewModel.deleteItem(at: indexPath.row)
         collectionView.performBatchUpdates({
             collectionView.deleteItems(at: [indexPath])
         }, completion: { _ in
@@ -90,9 +90,20 @@ extension ListViewController: UICollectionViewDelegate {
 }
 
 extension ListViewController: NotesViewControllerDelegate {
-    func saveText(_ text: String, at indexPath: IndexPath?) {
-        if let indexPath = indexPath {
-            viewModel.updateText(text, at: indexPath)
+    func deleteItem(at row: Int?) {
+        if let row = row {
+            viewModel.deleteItem(at: row)
+            collectionView.performBatchUpdates( {
+                collectionView.deleteItems(at: [IndexPath(row: row, section: 0)])
+            }, completion: { _ in
+                self.viewModel.saveChanges()
+            })
+        }
+    }
+    
+    func saveText(_ text: String, at row: Int?) {
+        if let row = row {
+            viewModel.updateText(text, at: row)
         } else {
             viewModel.saveText(text)
         }

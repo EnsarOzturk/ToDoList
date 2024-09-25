@@ -10,14 +10,18 @@ import Foundation
 protocol NotesViewModelDelegate: AnyObject {
     func popViewController()
     func showAlert()
-    func saveText(_ text: String, at indexPath: IndexPath?)
-    func deleteItem(at indexPath: IndexPath)
+    func saveText(_ text: String, at row: Int?)
+    func deleteItem(at row: Int)
 }
 
 final class NotesViewModel {
     
     weak var delegate: NotesViewModelDelegate?
-    var indexPath: IndexPath?
+    private var row: Int?
+    
+    init(row: Int?) {
+        self.row = row
+    }
    
     func textValidate(_ text: String?) -> Bool {
         guard let text = text, !text.trimmingCharacters(in: .whitespaces).isEmpty else { return false }
@@ -28,9 +32,9 @@ final class NotesViewModel {
         delegate?.popViewController()
     }
     
-    func saveButtonTapped(text: String, at indexPath: IndexPath?) {
+    func saveButtonTapped(text: String) {
         if textValidate(text) {
-            delegate?.saveText(text, at: indexPath)
+            delegate?.saveText(text, at: row)
             delegate?.popViewController()
         } else {
             delegate?.showAlert()
@@ -38,10 +42,8 @@ final class NotesViewModel {
     }
     
     func deleteButtonTapped() {
-        guard let indexPath = indexPath else { return }
-        delegate?.deleteItem(at: indexPath)
+        guard let row = row else { return }
+        delegate?.deleteItem(at: row)
         delegate?.popViewController()
     }
-    
-
 }

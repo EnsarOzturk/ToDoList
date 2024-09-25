@@ -8,9 +8,9 @@
 import UIKit
 
 protocol NotesViewControllerDelegate: AnyObject {
-    func saveText(_ text: String, at indexPath: IndexPath?)
+    func saveText(_ text: String, at row: Int?)
     func reloadData()
-    func deleteItem(at indexPath: IndexPath) // sadece row al
+    func deleteItem(at row: Int?)
 }
 
 final class NotesViewController: UIViewController {
@@ -25,7 +25,7 @@ final class NotesViewController: UIViewController {
     
     @IBOutlet private var textView: UITextView!
     weak var delegate: NotesViewControllerDelegate?
-    private let viewModel = NotesViewModel()
+    private var viewModel: NotesViewModel!
     var indexPath: IndexPath?
     
     override func viewDidLoad() {
@@ -34,6 +34,12 @@ final class NotesViewController: UIViewController {
         title = Constant.title
         if let initialText = initialText {
             textView.text = initialText
+        }
+        
+        if let row = indexPath?.row {
+            viewModel = NotesViewModel(row: row)
+        } else {
+            viewModel = NotesViewModel(row: nil)
         }
         
         viewModel.delegate = self
@@ -64,12 +70,12 @@ final class NotesViewController: UIViewController {
     }
     
     @objc func saveToggleButtonTapped(_ sender: UIBarButtonItem) {
-        viewModel.saveButtonTapped(text: textView.text, at: indexPath)
+        viewModel.saveButtonTapped(text: textView.text)
     }
 }
 extension NotesViewController: NotesViewModelDelegate {
-    func deleteItem(at indexPath: IndexPath) {
-        delegate?.deleteItem(at: indexPath)
+    func deleteItem(at row: Int) {
+        delegate?.deleteItem(at: row)
         delegate?.reloadData()
         popViewController()
     }
@@ -85,8 +91,8 @@ extension NotesViewController: NotesViewModelDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func saveText(_ text: String, at indexPath: IndexPath?) {
-        delegate?.saveText(text, at: indexPath)
+    func saveText(_ text: String, at row: Int?) {
+        delegate?.saveText(text, at: row)
     }
     
     func setupCancelButton(action: Selector) {
