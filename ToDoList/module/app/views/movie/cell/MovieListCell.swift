@@ -19,12 +19,15 @@ final class MovieListCell: UICollectionViewCell {
     
     func configure(with movie: Movie) {
         label.text = movie.title
-        imageView.image = nil
     }
         
     func updateImage(_ image: UIImage?) {
-        imageView.image = nil
+        imageView.image = image
     }
     
-    // prepare
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
+
 }

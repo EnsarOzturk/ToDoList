@@ -37,7 +37,6 @@ final class NotesViewController: UIViewController {
         }
         
         viewModel.delegate = self
-        viewModel.indexPath = indexPath
         setupButtons()
         setupTextView()
     }
