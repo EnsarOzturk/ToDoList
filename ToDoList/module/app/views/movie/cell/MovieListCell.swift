@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieListCell: UICollectionViewCell {
+final class MovieListCell: UICollectionViewCell {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var label: UILabel!
     
@@ -25,4 +25,6 @@ class MovieListCell: UICollectionViewCell {
     func updateImage(_ image: UIImage?) {
         imageView.image = nil
     }
+    
+    // prepare
 }

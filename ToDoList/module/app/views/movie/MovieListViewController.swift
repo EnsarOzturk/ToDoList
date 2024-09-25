@@ -12,7 +12,7 @@ protocol MovieListViewProtocol: AnyObject {
     func displayError(_ error: String)
 }
 
-class MovieListViewController: UIViewController {
+final class MovieListViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     private var viewModel: MovieListViewModelProtocol!

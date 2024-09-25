@@ -10,7 +10,7 @@ import UIKit
 protocol NotesViewControllerDelegate: AnyObject {
     func saveText(_ text: String, at indexPath: IndexPath?)
     func reloadData()
-    func deleteItem(at indexPath: IndexPath)
+    func deleteItem(at indexPath: IndexPath) // sadece row al
 }
 
 final class NotesViewController: UIViewController {
@@ -23,7 +23,7 @@ final class NotesViewController: UIViewController {
         static let title: String = "Notes"
     }
     
-    @IBOutlet fileprivate var textView: UITextView!
+    @IBOutlet private var textView: UITextView!
     weak var delegate: NotesViewControllerDelegate?
     private let viewModel = NotesViewModel()
     var indexPath: IndexPath?
@@ -38,7 +38,7 @@ final class NotesViewController: UIViewController {
         
         viewModel.delegate = self
         viewModel.indexPath = indexPath
-        viewModel.setupButtons()
+        setupButtons()
         setupTextView()
     }
     
@@ -48,6 +48,12 @@ final class NotesViewController: UIViewController {
         textView.tintColor = .black
         textView.layer.borderColor = UIColor.darkGray.cgColor
         textView.becomeFirstResponder()
+    }
+    
+    func setupButtons() {
+        setupCancelButton(action: #selector(NotesViewController.cancelToggleButtonTapped(_:)))
+        setupSaveButton(action: #selector(NotesViewController.saveToggleButtonTapped(_:)))
+        setupDeleteButton(action: #selector(NotesViewController.deleteToggleButtonTapped(_:)))
     }
     
     @objc func deleteToggleButtonTapped(_ sender: UIBarButtonItem) {

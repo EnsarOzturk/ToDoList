@@ -12,9 +12,6 @@ protocol NotesViewModelDelegate: AnyObject {
     func showAlert()
     func saveText(_ text: String, at indexPath: IndexPath?)
     func deleteItem(at indexPath: IndexPath)
-    func setupCancelButton(action: Selector)
-    func setupSaveButton(action: Selector)
-    func setupDeleteButton(action: Selector)
 }
 
 final class NotesViewModel {
@@ -46,9 +43,5 @@ final class NotesViewModel {
         delegate?.popViewController()
     }
     
-    func setupButtons() {
-        delegate?.setupCancelButton(action: #selector(NotesViewController.cancelToggleButtonTapped(_:)))
-        delegate?.setupSaveButton(action: #selector(NotesViewController.saveToggleButtonTapped(_:)))
-        delegate?.setupDeleteButton(action: #selector(NotesViewController.deleteToggleButtonTapped(_:)))
-    }
+
 }

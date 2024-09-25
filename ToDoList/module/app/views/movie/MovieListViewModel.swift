@@ -26,7 +26,7 @@ class MovieListViewModel: MovieListViewModelProtocol {
     
     private(set) var movies: [Movie] = []
     weak var view: MovieListViewProtocol?
-    var page = 1
+    private var page = 1 //isim değiştir
     
     init(view: MovieListViewProtocol) {
         self.view = view
@@ -43,14 +43,13 @@ class MovieListViewModel: MovieListViewModelProtocol {
             switch result {
             case .success(let response):
                 if page == 1 {
-                    self.movies = response.results
+                    movies = response.results
                 } else {
-                    self.movies.append(contentsOf: response.results)
+                    movies.append(contentsOf: response.results)
                 }
-                
-                self.view?.reloadData()
+                view?.reloadData()
             case .failure(let error):
-                self.view?.displayError(error.localizedDescription)
+                view?.displayError(error.localizedDescription)
             }
         }
     }
@@ -61,7 +60,7 @@ class MovieListViewModel: MovieListViewModelProtocol {
         imageRequest.httpMethod = HTTPMethod.GET.rawValue
         
         do {
-            let (data, _) = try await URLSession.shared.data(for: imageRequest)
+            let (data, _) = try await URLSession.shared.data(for: imageRequest) // burasıda netwok managerde beslensin
             return data
         } catch {
             print(error.localizedDescription)
