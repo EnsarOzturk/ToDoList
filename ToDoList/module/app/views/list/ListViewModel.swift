@@ -13,7 +13,7 @@ protocol ListViewModelDelegate: AnyObject {
 
 protocol ListViewModelProtocol {
     var numberOfRows: Int { get }
-    func cellForRowAt(at indexPath: IndexPath) -> ToDoItem
+    func cellForRowAt(row: Int) -> ToDoItem
     func deleteItem(at row: Int)
     func saveText(_ text: String)
     func updateText(_ text: String, at row: Int)
@@ -63,8 +63,8 @@ extension ListViewModel: ListViewModelProtocol {
         items.count
     }
     
-    func cellForRowAt(at indexPath: IndexPath) -> ToDoItem {
-        items[indexPath.row]
+    func cellForRowAt(row: Int)-> ToDoItem {
+        items[row]
     }
 
     func deleteItem(at row: Int) {

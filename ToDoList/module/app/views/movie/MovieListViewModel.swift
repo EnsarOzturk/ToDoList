@@ -22,11 +22,11 @@ protocol MovieListProtocol: AnyObject {
     func displayError(_ error: String)
 }
 
-class MovieListViewModel: MovieListViewModelProtocol {
+final class MovieListViewModel: MovieListViewModelProtocol {
     
     private(set) var movies: [Movie] = []
     weak var view: MovieListViewProtocol?
-    private var page = 1 //isim değiştir
+    private var page = 1
     
     init(view: MovieListViewProtocol) {
         self.view = view

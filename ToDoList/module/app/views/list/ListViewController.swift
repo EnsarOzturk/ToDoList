@@ -69,7 +69,7 @@ extension ListViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let item = viewModel.cellForRowAt(at: indexPath)
+        let item = viewModel.cellForRowAt(row: indexPath.row)
         cell.configure(with: item.text, isChecked: item.isChecked, indexPath: indexPath)
         return cell
     }
@@ -78,13 +78,14 @@ extension ListViewController: UICollectionViewDataSource {
 extension ListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: collectionView.bounds.width, height: 30)
+        
     }
 }
 
 extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let item = viewModel.cellForRowAt(at: indexPath)
+        let item = viewModel.cellForRowAt(row: indexPath.row)
         viewModel.itemSelected(at: indexPath, with: item.text)
     }
 }
