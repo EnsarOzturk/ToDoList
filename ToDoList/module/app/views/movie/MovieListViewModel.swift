@@ -12,7 +12,7 @@ protocol MovieListViewModelProtocol: AnyObject {
     var numberOfItems: Int { get }
     func fetchMovies()
     func movie(at indexPath: IndexPath) -> Movie
-    func sizeForItem(at indexPath: IndexPath, collectionViewWidth: CGFloat) -> CGSize
+    func sizeForItem(at indexPath: IndexPath, collectionViewWidth: Double) -> CGSize
     func fetchImageData(for movie: Movie) async -> Data?
     func willDisplay(index: Int)
 }
@@ -26,7 +26,7 @@ final class MovieListViewModel: MovieListViewModelProtocol {
     
     private(set) var movies: [Movie] = []
     weak var view: MovieListViewProtocol?
-    private var page = 1
+    private var endpointPage = 1
     
     init(view: MovieListViewProtocol) {
         self.view = view
@@ -39,10 +39,10 @@ final class MovieListViewModel: MovieListViewModelProtocol {
     func fetchMovies() {
         
         Task {
-            let result: Result<MovieResponse, NetworkError> = await NetworkManager.shared.request(type: MovieResponse.self, endpoint: HomeEndpointItem(page: String(page)), decodeType: MovieResponse.self)
+            let result: Result<MovieResponse, NetworkError> = await NetworkManager.shared.request(type: MovieResponse.self, endpoint: HomeEndpointItem(page: String(endpointPage)), decodeType: MovieResponse.self)
             switch result {
             case .success(let response):
-                if page == 1 {
+                if endpointPage == 1 {
                     movies = response.results
                 } else {
                     movies.append(contentsOf: response.results)
@@ -55,16 +55,18 @@ final class MovieListViewModel: MovieListViewModelProtocol {
     }
     
     func fetchImageData(for movie: Movie) async -> Data? {
-        guard let posterPath = movie.posterPath, let posterUrl = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)") else { return nil }
-        var imageRequest = URLRequest(url: posterUrl)
-        imageRequest.httpMethod = HTTPMethod.GET.rawValue
+        guard let posterPath = movie.posterPath, let posterUrl = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)") else {
+            return nil
+        }
         
-        do {
-            let (data, _) = try await URLSession.shared.data(for: imageRequest) // burasıda netwok managerde beslensin
+        let result: Result<Data, NetworkError> = await NetworkManager.shared.fetchImageData(from: posterUrl)
+        
+        switch result {
+        case .success(let data):
             return data
-        } catch {
-            print(error.localizedDescription)
-                return nil
+        case .failure(let error):
+            view?.displayError(error.localizedDescription)
+            return nil
         }
     }
     
@@ -72,15 +74,15 @@ final class MovieListViewModel: MovieListViewModelProtocol {
         movies[indexPath.item]
     }
     
-    func sizeForItem(at indexPath: IndexPath, collectionViewWidth: CGFloat) -> CGSize {
-        let spacing: CGFloat = 20
+    func sizeForItem(at indexPath: IndexPath, collectionViewWidth: Double) -> CGSize {
+        let spacing: Double = 20
         let width = (collectionViewWidth - spacing * 3) / 2
         return CGSize(width: width, height: width * 4)
     }
     
     func willDisplay(index: Int) {
         if index < movies.count - 1 {
-            page += 1
+            endpointPage += 1
             fetchMovies()
         }
     }

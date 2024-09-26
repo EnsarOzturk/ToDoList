@@ -51,4 +51,19 @@ class NetworkManager {
             }
         }
     }
+    
+    func fetchImageData(from url: URL) async -> Result<Data, NetworkError> {
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.GET.rawValue
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                return .failure(.requestFailed)
+            }
+            return .success(data)
+        } catch {
+            return .failure(.requestFailed)
+        }
+    }
 }
