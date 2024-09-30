@@ -29,5 +29,4 @@ final class MovieListCell: UICollectionViewCell {
         super.prepareForReuse()
         imageView.image = nil
     }
-
 }

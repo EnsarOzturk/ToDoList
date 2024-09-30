@@ -39,7 +39,10 @@ final class MovieListViewModel: MovieListViewModelProtocol {
     func fetchMovies() {
         
         Task {
-            let result: Result<MovieResponse, NetworkError> = await NetworkManager.shared.request(type: MovieResponse.self, endpoint: HomeEndpointItem(page: String(endpointPage)), decodeType: MovieResponse.self)
+            let result: Result<MovieResponse, NetworkError> = await NetworkManager.shared.request(
+                type: MovieResponse.self,
+                endpoint: EndpointItems.homeEndpointItem(page: String(endpointPage)),
+                decodeType: MovieResponse.self)
             switch result {
             case .success(let response):
                 if endpointPage == 1 {
