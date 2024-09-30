@@ -7,6 +7,7 @@
 
 import UIKit
 
+@MainActor
 protocol MovieListViewProtocol: AnyObject {
     func reloadData()
     func displayError(_ error: String)
@@ -58,17 +59,13 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout {
 
 extension MovieListViewController: MovieListViewProtocol {
     func reloadData() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
+        collectionView.reloadData()
     }
     
     func displayError(_ error: String) {
-        DispatchQueue.main.async {
             let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             self.present(alert, animated: true)
-        }
     }
 }
 

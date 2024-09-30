@@ -47,9 +47,9 @@ final class MovieListViewModel: MovieListViewModelProtocol {
                 } else {
                     movies.append(contentsOf: response.results)
                 }
-                view?.reloadData()
+                await view?.reloadData()
             case .failure(let error):
-                view?.displayError(error.localizedDescription)
+                await view?.displayError(error.localizedDescription)
             }
         }
     }
@@ -65,7 +65,7 @@ final class MovieListViewModel: MovieListViewModelProtocol {
         case .success(let data):
             return data
         case .failure(let error):
-            view?.displayError(error.localizedDescription)
+            await view?.displayError(error.localizedDescription)
             return nil
         }
     }
