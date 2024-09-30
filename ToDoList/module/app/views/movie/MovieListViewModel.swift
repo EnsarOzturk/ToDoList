@@ -26,7 +26,7 @@ final class MovieListViewModel: MovieListViewModelProtocol {
     
     private(set) var movies: [Movie] = []
     weak var view: MovieListViewProtocol?
-    private var endpointPage = 1
+    private var homePage = 1
     
     init(view: MovieListViewProtocol) {
         self.view = view
@@ -41,11 +41,11 @@ final class MovieListViewModel: MovieListViewModelProtocol {
         Task {
             let result: Result<MovieResponse, NetworkError> = await NetworkManager.shared.request(
                 type: MovieResponse.self,
-                endpoint: EndpointItems.homeEndpointItem(page: String(endpointPage)),
+                endpoint: HomeEndpointItem.home(page: String(homePage)),
                 decodeType: MovieResponse.self)
             switch result {
             case .success(let response):
-                if endpointPage == 1 {
+                if homePage == 1 {
                     movies = response.results
                 } else {
                     movies.append(contentsOf: response.results)
@@ -85,7 +85,7 @@ final class MovieListViewModel: MovieListViewModelProtocol {
     
     func willDisplay(index: Int) {
         if index < movies.count - 1 {
-            endpointPage += 1
+            homePage += 1
             fetchMovies()
         }
     }

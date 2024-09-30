@@ -7,20 +7,19 @@
 
 import Foundation
 
-enum EndpointItems: Endpoint {
-   
-    case homeEndpointItem(page: String)
+enum HomeEndpointItem: Endpoint {
+    case home(page: String)
     
     var path: String {
         switch self {
-        case .homeEndpointItem:
+        case .home:
             return "/movie/popular"
         }
     }
     
     var parameters: [URLQueryItem] {
         switch self {
-        case .homeEndpointItem(let page):
+        case .home(let page):
             return  [
                 URLQueryItem(name: "api_key", value: API.apiKey),
                 URLQueryItem(name: "language", value: "en-US"),
@@ -31,7 +30,7 @@ enum EndpointItems: Endpoint {
     
     var method: HTTPMethod {
         switch self {
-        case .homeEndpointItem:
+        case .home:
             return .GET
         }
     }
