@@ -15,6 +15,7 @@ final class MovieListCell: UICollectionViewCell {
         super.awakeFromNib()
         imageView.backgroundColor = .blue
         label.numberOfLines = 0
+        label.textAlignment = .center
     }
     
     func configure(with movie: Movie) {

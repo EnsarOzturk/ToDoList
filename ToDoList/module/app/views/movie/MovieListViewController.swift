@@ -17,6 +17,8 @@ final class MovieListViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     private var viewModel: MovieListViewModelProtocol!
+    private var searchController = UISearchController(searchResultsController: nil)
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,22 @@ final class MovieListViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "MovieListCell", bundle: nil), forCellWithReuseIdentifier: "MovieListCell")
         viewModel.fetchMovies()
+        setupSearchController()
+    }
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Movies"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+}
+
+extension MovieListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        viewModel.filterMovies(with: searchText)
     }
 }
 
@@ -63,9 +81,9 @@ extension MovieListViewController: MovieListViewProtocol {
     }
     
     func displayError(_ error: String) {
-            let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            self.present(alert, animated: true)
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
     }
 }
 

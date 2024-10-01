@@ -14,4 +14,9 @@ struct MovieResponse: Codable {
 struct Movie: Codable {
     let title: String?
     let posterPath: String?
+    
+    init(title: String = "", posterPath: String? = nil) {
+        self.title = title
+        self.posterPath = posterPath
+    }
 }
