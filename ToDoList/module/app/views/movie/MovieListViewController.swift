@@ -7,7 +7,6 @@
 
 import UIKit
 
-@MainActor
 protocol MovieListViewProtocol: AnyObject {
     func reloadData()
     func displayError(_ error: String)
@@ -53,7 +52,7 @@ extension MovieListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieListCell", for: indexPath) as! MovieListCell
-        let movie = viewModel.movie(at: indexPath)
+        let movie = viewModel.movie(at: indexPath.row)
         cell.configure(with: movie)
         
         Task {
@@ -83,7 +82,7 @@ extension MovieListViewController: MovieListViewProtocol {
     func displayError(_ error: String) {
         let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(alert, animated: true)
+        present(alert, animated: true)
     }
 }
 

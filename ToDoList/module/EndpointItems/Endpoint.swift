@@ -24,11 +24,7 @@ extension Endpoint {
     var header: [String : String] {
         ["Content-Type": "application/json"]
     }
-    
-    var method: HTTPMethod {
-        return .GET
-    }
-    
+
     var parameters: [URLQueryItem] {
         return [URLQueryItem(name: "", value: nil)]
     }

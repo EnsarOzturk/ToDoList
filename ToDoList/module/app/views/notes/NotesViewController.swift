@@ -9,8 +9,13 @@ import UIKit
 
 protocol NotesViewControllerDelegate: AnyObject {
     func saveText(_ text: String, at row: Int?)
-    func reloadData()
     func deleteItem(at row: Int?)
+}
+
+protocol NotesViewControllerProtocol: AnyObject {
+    func saveText(_ text: String, at row: Int?)
+    func showAlert()
+    func popViewController()
 }
 
 final class NotesViewController: UIViewController {
@@ -24,9 +29,8 @@ final class NotesViewController: UIViewController {
     }
     
     @IBOutlet private var textView: UITextView!
-    weak var delegate: NotesViewControllerDelegate?
-    private var viewModel: NotesViewModel!
-    var indexPath: IndexPath?
+    var delegate: NotesViewControllerDelegate?
+    var viewModel: NotesViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +40,6 @@ final class NotesViewController: UIViewController {
             textView.text = initialText
         }
         
-        if let row = indexPath?.row {
-            viewModel = NotesViewModel(row: row)
-        } else {
-            viewModel = NotesViewModel(row: nil)
-        }
-        
-        viewModel.delegate = self
         setupButtons()
         setupTextView()
     }
@@ -56,45 +53,28 @@ final class NotesViewController: UIViewController {
     }
     
     func setupButtons() {
-        setupCancelButton(action: #selector(NotesViewController.cancelToggleButtonTapped(_:)))
-        setupSaveButton(action: #selector(NotesViewController.saveToggleButtonTapped(_:)))
-        setupDeleteButton(action: #selector(NotesViewController.deleteToggleButtonTapped(_:)))
+        setupCancelButton(action: #selector(cancelToggleButtonTapped(_:)))
+        setupSaveButton(action: #selector(saveToggleButtonTapped(_:)))
+        setupDeleteButton(action: #selector(deleteToggleButtonTapped(_:)))
     }
     
     @objc func deleteToggleButtonTapped(_ sender: UIBarButtonItem) {
-        viewModel.deleteButtonTapped()
+        delegate?.deleteItem(at: viewModel.row)
+        popViewController()
     }
     
     @objc func cancelToggleButtonTapped(_ sender: UIBarButtonItem) {
-        viewModel.cancelButtonTapped()
+        popViewController()
     }
     
     @objc func saveToggleButtonTapped(_ sender: UIBarButtonItem) {
         viewModel.saveButtonTapped(text: textView.text)
     }
-}
-extension NotesViewController: NotesViewModelDelegate {
-    func deleteItem(at row: Int) {
-        delegate?.deleteItem(at: row)
-        delegate?.reloadData()
-        popViewController()
-    }
     
     func popViewController() {
         navigationController?.popViewController(animated: true)
     }
-    
-    func showAlert() {
-        let alert = UIAlertController().alert(title: "Warning", message: "please write something", actionTitle: "OK") {
-            self.textView.becomeFirstResponder()
-        }
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    func saveText(_ text: String, at row: Int?) {
-        delegate?.saveText(text, at: row)
-    }
-    
+
     func setupCancelButton(action: Selector) {
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: action)
         navigationItem.leftBarButtonItem = cancelButton
@@ -112,7 +92,22 @@ extension NotesViewController: NotesViewModelDelegate {
         deleteButton.tintColor = .black
         navigationItem.rightBarButtonItems = [deleteButton, navigationItem.rightBarButtonItem].compactMap { $0 }
     }
+    
+    func saveText(_ text: String, at row: Int?) {
+        delegate?.saveText(text, at: row)
+    }
 }
+
+extension NotesViewController: NotesViewControllerProtocol {
+    func showAlert() {
+        let alert = UIAlertController().alert(title: "Warning", message: "please write something", actionTitle: "OK") {
+            self.textView.becomeFirstResponder()
+        }
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+
+
 
 
 

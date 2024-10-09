@@ -91,6 +91,7 @@ extension ListViewController: UICollectionViewDelegate {
 }
 
 extension ListViewController: NotesViewControllerDelegate {
+    
     func deleteItem(at row: Int?) {
         if let row = row {
             viewModel.deleteItem(at: row)
@@ -103,11 +104,7 @@ extension ListViewController: NotesViewControllerDelegate {
     }
     
     func saveText(_ text: String, at row: Int?) {
-        if let row = row {
-            viewModel.updateText(text, at: row)
-        } else {
-            viewModel.saveText(text)
-        }
+        viewModel.saveText(text, at: row)
     }
 }
 
@@ -116,8 +113,8 @@ extension ListViewController: ListViewProtocol {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let notesVC = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as? NotesViewController {
                 notesVC.delegate = self
-                notesVC.indexPath = indexPath
                 notesVC.initialText = text
+                notesVC.viewModel = NotesViewModel(row: indexPath?.row, view: notesVC)
                 navigationController?.pushViewController(notesVC, animated: true)
             } else {
         }

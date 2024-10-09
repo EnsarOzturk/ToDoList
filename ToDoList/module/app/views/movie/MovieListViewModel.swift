@@ -8,10 +8,9 @@
 import Foundation
 
 protocol MovieListViewModelProtocol: AnyObject {
-    var movies: [Movie] { get }
     var numberOfItems: Int { get }
     func fetchMovies()
-    func movie(at indexPath: IndexPath) -> Movie
+    func movie(at row: Int) -> Movie
     func sizeForItem(at indexPath: IndexPath, collectionViewWidth: Double) -> CGSize
     func fetchImageData(for movie: Movie) async -> Data?
     func willDisplay(index: Int)
@@ -25,7 +24,7 @@ protocol MovieListProtocol: AnyObject {
 
 final class MovieListViewModel: MovieListViewModelProtocol {
     
-    private(set) var movies: [Movie] = []
+    private var movies: [Movie] = []
     private var filteredMovies: [Movie] = []
     private var isSearching: Bool = false
     
@@ -40,34 +39,34 @@ final class MovieListViewModel: MovieListViewModelProtocol {
         return isSearching ? filteredMovies.count : movies.count
     }
     
-    func movie(at indexPath: IndexPath) -> Movie {
-        return isSearching ? filteredMovies[indexPath.item] : movies[indexPath.item]
+    func movie(at row: Int) -> Movie {
+        return isSearching ? filteredMovies[row] : movies[row]
     }
     
     func filterMovies(with query: String) {
         isSearching = !query.isEmpty
         if query.isEmpty {
             filteredMovies = []
+            view?.reloadData()
         } else {
             Task {
                 await searchMovies(query: query)
             }
         }
-        Task { await view?.reloadData() }
+        Task { view?.reloadData() }
     }
     
     func searchMovies(query: String) async {
         let result: Result<MovieResponse, NetworkError> = await NetworkManager.shared.request(
             type: MovieResponse.self,
-            endpoint: HomeEndpointItem.search(query: query),
-            decodeType: MovieResponse.self)
+            endpoint: HomeEndpointItem.search(query: query))
         
         switch result {
         case .success(let response):
             filteredMovies = response.results
-            await view?.reloadData()
+            view?.reloadData()
         case .failure(let error):
-            await view?.displayError(error.localizedDescription)
+            view?.displayError(error.localizedDescription)
         }
     }
     
@@ -75,8 +74,7 @@ final class MovieListViewModel: MovieListViewModelProtocol {
         Task {
             let result: Result<MovieResponse, NetworkError> = await NetworkManager.shared.request(
                 type: MovieResponse.self,
-                endpoint: HomeEndpointItem.home(page: String(homePage)),
-                decodeType: MovieResponse.self)
+                endpoint: HomeEndpointItem.home(page: String(homePage)))
             switch result {
             case .success(let response):
                 if homePage == 1 {
@@ -84,9 +82,9 @@ final class MovieListViewModel: MovieListViewModelProtocol {
                 } else {
                     movies.append(contentsOf: response.results)
                 }
-                await view?.reloadData()
+                view?.reloadData()
             case .failure(let error):
-                await view?.displayError(error.localizedDescription)
+                view?.displayError(error.localizedDescription)
             }
         }
     }
@@ -102,7 +100,7 @@ final class MovieListViewModel: MovieListViewModelProtocol {
         case .success(let data):
             return data
         case .failure(let error):
-            await view?.displayError(error.localizedDescription)
+            view?.displayError(error.localizedDescription)
             return nil
         }
     }
@@ -119,4 +117,5 @@ final class MovieListViewModel: MovieListViewModelProtocol {
             fetchMovies()
         }
     }
+    
 }

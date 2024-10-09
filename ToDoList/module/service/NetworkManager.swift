@@ -25,7 +25,7 @@ class NetworkManager {
     
     private init() {}
     
-    func request<T: Decodable>(type: T.Type, endpoint: Endpoint, decodeType: T.Type) async -> Result<T, NetworkError> {
+    func request<T: Decodable>(type: T.Type, endpoint: Endpoint) async -> Result<T, NetworkError> {
         guard let url = endpoint.url else {
             return .failure(.badURL)
         }
