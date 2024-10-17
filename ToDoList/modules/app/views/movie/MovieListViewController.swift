@@ -14,17 +14,20 @@ protocol MovieListViewProtocol: AnyObject {
 
 final class MovieListViewController: UIViewController {
     
+    struct Constant {
+        static let identifier: String = "MovieListCell"
+    }
+    
     @IBOutlet var collectionView: UICollectionView!
     private var viewModel: MovieListViewModelProtocol!
     private var searchController = UISearchController(searchResultsController: nil)
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel = MovieListViewModel(view: self)
         collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "MovieListCell", bundle: nil), forCellWithReuseIdentifier: "MovieListCell")
+        collectionView.register(UINib(nibName: Constant.identifier, bundle: nil), forCellWithReuseIdentifier: Constant.identifier)
         viewModel.fetchMovies()
         setupSearchController()
     }
@@ -51,7 +54,7 @@ extension MovieListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieListCell", for: indexPath) as! MovieListCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constant.identifier, for: indexPath) as! MovieListCell
         let movie = viewModel.movie(at: indexPath.row)
         cell.configure(with: movie)
         
@@ -74,12 +77,16 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension MovieListViewController: MovieListViewProtocol {
+extension MovieListViewController: MovieListViewProtocol, AlertDisplaying {
     func reloadData() {
-        collectionView.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     func displayError(_ error: String) {
+        displayAlert(title: "Error", message: "error")
+        
         let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)

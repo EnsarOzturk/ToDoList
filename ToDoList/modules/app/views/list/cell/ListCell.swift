@@ -19,6 +19,7 @@ final class ListCell: UICollectionViewCell {
         static let buttonRadius: Double = 2.5
         static let selected: String = "✓"
         static let normal: String = ""
+        static let key: String = "toDoItemsKey"
     }
     
     private let label: UILabel = {
@@ -89,11 +90,11 @@ final class ListCell: UICollectionViewCell {
     
     private func saveToUserDefaults() {
         guard let indexPath = indexPath else { return }
-        var items = userDefaultsAssistant.loadData(forKey: "toDoItemsKey")
+        var items = userDefaultsAssistant.loadData(forKey: Constant.key)
         
         if items.indices.contains(indexPath.row) {
             items[indexPath.row].isChecked = isChecked
-            userDefaultsAssistant.saveData(items, forKey: "toDoItemsKey")
+            userDefaultsAssistant.saveData(items, forKey: Constant.key)
         }
     }
        

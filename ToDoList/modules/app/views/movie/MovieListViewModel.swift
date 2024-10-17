@@ -24,12 +24,20 @@ protocol MovieListProtocol: AnyObject {
 
 final class MovieListViewModel: MovieListViewModelProtocol {
     
+    struct Constant {
+        static let spacingSize: Double = 20
+        static let numberOne: Double = 1
+        static let numberTwo: Double = 2
+        static let numberFour: Double = 4
+        static let imageUrl: String = "https://image.tmdb.org/t/p/w500"
+    }
+    
     private var movies: [Movie] = []
     private var filteredMovies: [Movie] = []
     private var isSearching: Bool = false
     
     weak var view: MovieListViewProtocol?
-    private var homePage = 1
+    private var homePage = Constant.numberOne
     
     init(view: MovieListViewProtocol) {
         self.view = view
@@ -77,7 +85,7 @@ final class MovieListViewModel: MovieListViewModelProtocol {
                 endpoint: HomeEndpointItem.home(page: String(homePage)))
             switch result {
             case .success(let response):
-                if homePage == 1 {
+                if homePage == Constant.numberOne {
                     movies = response.results
                 } else {
                     movies.append(contentsOf: response.results)
@@ -90,7 +98,7 @@ final class MovieListViewModel: MovieListViewModelProtocol {
     }
     
     func fetchImageData(for movie: Movie) async -> Data? {
-        guard let posterPath = movie.posterPath, let posterUrl = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)") else {
+        guard let posterPath = movie.posterPath, let posterUrl = URL(string: "\(Constant.imageUrl)\(posterPath)") else {
             return nil
         }
         
@@ -106,14 +114,14 @@ final class MovieListViewModel: MovieListViewModelProtocol {
     }
 
     func sizeForItem(at indexPath: IndexPath, collectionViewWidth: Double) -> CGSize {
-        let spacing: Double = 20
-        let width = (collectionViewWidth - spacing * 4) / 2
-        return CGSize(width: width, height: width * 4)
+        let spacing: Double = Constant.spacingSize
+        let width = (collectionViewWidth - spacing * Constant.numberFour) / Constant.numberTwo
+        return CGSize(width: width, height: width * Constant.numberFour)
     }
     
     func willDisplay(index: Int) {
-        if index < movies.count - 1 {
-            homePage += 1
+        if index < movies.count - Int(Constant.numberOne) {
+            homePage += Constant.numberOne
             fetchMovies()
         }
     }

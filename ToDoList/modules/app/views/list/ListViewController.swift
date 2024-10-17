@@ -7,11 +7,10 @@
 
 import UIKit
 
-protocol ListViewProtocol: AnyObject {
+protocol ListViewControllerProtocol: AnyObject {
     func reloadData()
     func navigateToNotesViewController(with text: String?, at indexPath: IndexPath?)
     func addButtonAction()
-    func setupCollectionView(with layout: UICollectionViewFlowLayout)
 }
 
 final class ListViewController: UIViewController {
@@ -36,15 +35,35 @@ final class ListViewController: UIViewController {
         reloadData()
     }
     
+    func setupCollectionView(with layout: UICollectionViewFlowLayout) {
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(ListCell.self, forCellWithReuseIdentifier: ListCell.identifier)
+        collectionView.backgroundColor = .systemBackground
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+    
     private func setupLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: Constant.zero, left: Constant.zero, bottom: Constant.zero, right: Constant.zero)
+        layout.sectionInset = UIEdgeInsets(top: Constant.zero, 
+                                           left: Constant.zero, 
+                                           bottom: Constant.zero,
+                                           right: Constant.zero)
         layout.minimumInteritemSpacing = Constant.zero
         layout.minimumLineSpacing = Constant.zero
         return layout
     }
-    
+ 
     @objc func addButtonAction() {
         viewModel.addButtonTapped()
     }
@@ -78,7 +97,6 @@ extension ListViewController: UICollectionViewDataSource {
 extension ListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: collectionView.bounds.width, height: 30)
-        
     }
 }
 
@@ -90,31 +108,14 @@ extension ListViewController: UICollectionViewDelegate {
     }
 }
 
-extension ListViewController: NotesViewControllerDelegate {
-    
-    func deleteItem(at row: Int?) {
-        if let row = row {
-            viewModel.deleteItem(at: row)
-            collectionView.performBatchUpdates( {
-                collectionView.deleteItems(at: [IndexPath(row: row, section: 0)])
-            }, completion: { _ in
-                self.viewModel.saveChanges()
-            })
-        }
-    }
-    
-    func saveText(_ text: String, at row: Int?) {
-        viewModel.saveText(text, at: row)
-    }
-}
-
-extension ListViewController: ListViewProtocol {
+extension ListViewController: ListViewControllerProtocol {
     func navigateToNotesViewController(with text: String?, at indexPath: IndexPath?) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let notesVC = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as? NotesViewController {
-                notesVC.delegate = self
                 notesVC.initialText = text
-                notesVC.viewModel = NotesViewModel(row: indexPath?.row, view: notesVC)
+                let notesViewModel = NotesViewModel(row: indexPath?.row, view: notesVC)
+                notesViewModel.delegate = viewModel.notesViewModelDelegate
+                notesVC.viewModel = notesViewModel
                 navigationController?.pushViewController(notesVC, animated: true)
             } else {
         }
@@ -122,23 +123,6 @@ extension ListViewController: ListViewProtocol {
    
     func reloadData() {
         collectionView.reloadData()
-    }
-    
-    func setupCollectionView(with layout: UICollectionViewFlowLayout) {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(ListCell.self, forCellWithReuseIdentifier: ListCell.identifier)
-        collectionView.backgroundColor = .systemBackground
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(collectionView)
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
     }
 }
 
@@ -149,4 +133,3 @@ extension ListViewController: ListViewModelDelegate {
         navigationItem.rightBarButtonItem = addButton
     }
 }
-

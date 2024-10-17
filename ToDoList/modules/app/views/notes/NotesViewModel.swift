@@ -7,10 +7,16 @@
 
 import Foundation
 
+protocol NotesViewModelDelegate: AnyObject {
+    func updateText(_ text: String, at row: Int?)
+    func deleteItem(at row: Int?)
+}
+
 final class NotesViewModel {
     
     private let view: NotesViewControllerProtocol
     let row: Int?
+    weak var delegate: NotesViewModelDelegate?
     
     init(row: Int?, view: NotesViewControllerProtocol) {
         self.row = row
@@ -24,10 +30,14 @@ final class NotesViewModel {
     
     func saveButtonTapped(text: String) {
         if textValidate(text) {
-            view.saveText(text, at: row)
+            delegate?.updateText(text, at: row)
             view.popViewController()
         } else {
             view.showAlert()
         }
+    }
+    
+    func deleteItem() {
+        delegate?.deleteItem(at: row)
     }
 }

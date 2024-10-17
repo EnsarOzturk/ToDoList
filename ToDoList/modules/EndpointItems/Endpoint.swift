@@ -24,10 +24,6 @@ extension Endpoint {
     var header: [String : String] {
         ["Content-Type": "application/json"]
     }
-
-    var parameters: [URLQueryItem] {
-        return [URLQueryItem(name: "", value: nil)]
-    }
     
     var url: URL? {
         var components = URLComponents(string: baseURL + path)

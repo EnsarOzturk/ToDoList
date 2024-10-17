@@ -9,17 +9,17 @@ import UIKit
 
 final class MovieListCell: UICollectionViewCell {
     @IBOutlet var imageView: UIImageView!
-    @IBOutlet var label: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         imageView.backgroundColor = .blue
-        label.numberOfLines = 0
-        label.textAlignment = .center
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
     }
     
     func configure(with movie: Movie) {
-        label.text = movie.title
+        titleLabel.text = movie.title
     }
         
     func updateImage(_ image: UIImage?) {

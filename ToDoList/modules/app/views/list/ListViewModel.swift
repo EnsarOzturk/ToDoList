@@ -12,6 +12,7 @@ protocol ListViewModelDelegate: AnyObject {
 }
 
 protocol ListViewModelProtocol {
+    var notesViewModelDelegate: NotesViewModelDelegate { get }
     var numberOfRows: Int { get }
     func cellForRowAt(row: Int) -> ToDoItem
     func deleteItem(at row: Int)
@@ -28,27 +29,28 @@ final class ListViewModel {
         static let systemFontSize: Double = 15
         static let maxHeight: Double = 40
         static let zero: Double = 0
+        static let key: String = "toDoItemsKey"
     }
     
     private var items: [ToDoItem] = []
-    weak var view: ListViewProtocol?
+    weak var view: ListViewControllerProtocol?
     weak var delegate: ListViewModelDelegate?
-    private let userDefaultsAssistant: UserDefaultsAssistant<ToDoItem>
+    private var userDefaultsAssistant: UserDefaultsAssistant<ToDoItem>
     
-    init(view: ListViewProtocol, delegate: ListViewModelDelegate) {
+    init(view: ListViewControllerProtocol, delegate: ListViewModelDelegate) {
         self.view = view
         self.delegate = delegate
         self.userDefaultsAssistant = UserDefaultsAssistant<ToDoItem>()
     }
 
     private func loadItems() {
-        let items = userDefaultsAssistant.loadData(forKey: "toDoItemsKey")
+        let items = userDefaultsAssistant.loadData(forKey: Constant.key)
         self.items = items
         view?.reloadData()
     }
     
     private func saveToUserDefaults() {
-        userDefaultsAssistant.saveData(items, forKey: "toDoItemsKey")
+        userDefaultsAssistant.saveData(items, forKey: Constant.key)
     }
     
     @objc private func addButtonAction() {
@@ -57,7 +59,10 @@ final class ListViewModel {
 }
 
 extension ListViewModel: ListViewModelProtocol {
-   
+    var notesViewModelDelegate: NotesViewModelDelegate {
+        self
+    }
+    
     var numberOfRows: Int {
         items.count
     }
@@ -68,7 +73,7 @@ extension ListViewModel: ListViewModelProtocol {
 
     func deleteItem(at row: Int) {
         let item = items.remove(at: row)
-        userDefaultsAssistant.removeData(item, forKey: "toDoItemsKey")
+        userDefaultsAssistant.removeData(item, forKey: Constant.key)
     }
     
     private func updateText(_ text: String, at row: Int) {
@@ -115,4 +120,15 @@ extension ListViewModel: ListViewModelProtocol {
     }
 }
 
-
+extension ListViewModel: NotesViewModelDelegate {
+    func deleteItem(at row: Int?) {
+        if let row = row {
+            deleteItem(at: row)
+            view?.reloadData()
+        }
+    }
+    
+    func updateText(_ text: String, at row: Int?) {
+        saveText(text, at: row)
+    }
+}
