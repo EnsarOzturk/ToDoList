@@ -10,6 +10,7 @@ import UIKit
 typealias AlertAction = (UIAlertAction) -> Void
 protocol AlertDisplaying {
     func displayAlert(title: String, message: String)
+    func displayAlert(message: String)
     func displayFailureAlert(message: String?)
     func displayAlertWithAction(title: String?, message: String?, action: AlertAction?)
 }
@@ -19,6 +20,9 @@ extension AlertDisplaying where Self: UIViewController {
         displayAlert(title: title,
                      message: message,
                      actions: [UIAlertAction(title: "Ok", style: .cancel, handler: nil)])
+    }
+    func displayAlert(message: String) {
+        displayAlert(title: "", message: message)
     }
     
     func displayFailureAlert(message: String? = "") {

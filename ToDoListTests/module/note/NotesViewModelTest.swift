@@ -18,7 +18,6 @@ final class NotesViewModelTest: XCTestCase {
         mockView = MockNotesViewController()
         viewModel = NotesViewModel.init(row: 0, view: mockView)
         viewModel.delegate = mockDelegate
-        viewModel.saveButtonTapped(text: textValid)
     }
     
     override func tearDown() { //temizlik , bellek...
@@ -27,7 +26,12 @@ final class NotesViewModelTest: XCTestCase {
         mockView = nil
     }
     
-    func test_saveButtonTapped_textValidated() {
+    func test_saveButtonTapped_textValidated_ınvokedPopViewController() {
+        
+        XCTAssertEqual(mockView.isShowAlertCalled, false)
+        XCTAssertEqual(mockView.isPopViewController, false)
+        
+        viewModel.saveButtonTapped(text: textValid)
         
         XCTAssertEqual(mockView.isShowAlertCalled, false)
         XCTAssertEqual(mockView.isPopViewController, true)
@@ -36,13 +40,13 @@ final class NotesViewModelTest: XCTestCase {
         XCTAssertEqual(mockDelegate.updatedRow, 0)
     }
     
-    func test_saveButtonTapped_textNotValidated() {
-        XCTAssertEqual(mockView.isShowAlertCalled, false)
+    func test_saveButtonTapped_textNotValidated_ınvokDisplayAlertwithTitle() {
+        XCTAssertEqual(mockView.isDisplayAlertWithTitle, false)
         XCTAssertEqual(mockView.isPopViewController, false)
         
         viewModel.saveButtonTapped(text: "") //boş metin girilir.....
         
-        XCTAssertEqual(mockView.isShowAlertCalled, true)
+        XCTAssertEqual(mockView.isDisplayAlertWithTitle, true)
         XCTAssertEqual(mockView.isPopViewController, false)
     }
     

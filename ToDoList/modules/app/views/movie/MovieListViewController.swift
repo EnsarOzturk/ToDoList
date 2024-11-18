@@ -12,11 +12,11 @@ protocol MovieListViewProtocol: AnyObject {
     func displayError(_ error: String)
 }
 
+struct Constant {
+    static let identifier: String = "MovieListCell"
+}
+
 final class MovieListViewController: UIViewController {
-    
-    struct Constant {
-        static let identifier: String = "MovieListCell"
-    }
     
     @IBOutlet var collectionView: UICollectionView!
     private var viewModel: MovieListViewModelProtocol!

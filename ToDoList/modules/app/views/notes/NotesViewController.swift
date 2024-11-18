@@ -7,8 +7,7 @@
 
 import UIKit
 
-protocol NotesViewControllerProtocol: AnyObject {
-    func showAlert()
+protocol NotesViewControllerProtocol: AlertDisplaying {
     func popViewController()
 }
 
@@ -83,11 +82,7 @@ final class NotesViewController: UIViewController {
     }
 }
 
-extension NotesViewController: NotesViewControllerProtocol, AlertDisplaying {
-    func showAlert() {
-        displayAlert(title: "Warning", message: "please write something")
-    }
-    
+extension NotesViewController: NotesViewControllerProtocol {
     func popViewController() {
         navigationController?.popViewController(animated: true)
     }

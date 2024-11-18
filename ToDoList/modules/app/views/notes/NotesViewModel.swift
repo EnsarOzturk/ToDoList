@@ -33,7 +33,7 @@ final class NotesViewModel {
             delegate?.updateText(text, at: row)
             view.popViewController()
         } else {
-            view.showAlert()
+            view.displayAlert(title: "Warning", message: "please write something")
         }
     }
     
